@@ -2,18 +2,18 @@ package iteso.mx.UI;
 
 import javax.swing.*;
 
-/**
- * Created by Erick on 14/09/2016.
- */
 public class MainFrame extends JFrame {
 
-    private BienvenidaPanel bienvenidaPanel;
+    public WelcomePanel welcomePanel;
 
     public MainFrame() {
-        bienvenidaPanel = new BienvenidaPanel();
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        welcomePanel = new WelcomePanel();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        this.add(bienvenidaPanel);
-        this.setVisible(true);
+        add(welcomePanel);
+        setSize(200, 200);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
     }
 }
