@@ -7,9 +7,9 @@ public class App {
     private View theView;
 
     public App() {
-        theController = new Controller();
         theModel = new Model();
         theView = new View();
+        theController = new Controller(theModel,theView);
     }
 
     public static void main(String args[]) {

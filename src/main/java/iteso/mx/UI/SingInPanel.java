@@ -7,7 +7,6 @@ public class SingInPanel extends JPanel{
     private JLabel passwordJLabel;
     private JTextField userJTextField;
     private JTextField passwordJTextField;
-    private JButton singUp;
     private JButton singIn;
     private JButton forgotten;
 
@@ -16,11 +15,15 @@ public class SingInPanel extends JPanel{
         passwordJLabel = new JLabel("Contraseña");
         userJTextField = new JTextField();
         passwordJTextField = new JTextField();
-        singUp = new JButton("Registrarse");
         singIn = new JButton("Iniciar Sesión");
         forgotten = new JButton("¿Olvidaste tu contraseña?");
+        setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
 
-
-        
+        add(userJLabel);
+        add(passwordJLabel);
+        add(userJTextField);
+        add(passwordJTextField);
+        add(singIn);
+        add(forgotten);
     }
 }
