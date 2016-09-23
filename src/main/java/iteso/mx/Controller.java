@@ -13,10 +13,18 @@ public class Controller {
         this.theModel = theModel;
         this.theView = theView;
 
-        theView.welcomePanel.addWelcomeJButtonListener(new ActionListener() {
+        theView.welcomePanel.addSignInListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 theView.windowPicker.show(theView.windowsPanel, theView.SING_IN_PANEL);
                 theView.setSize(new Dimension(400,400));
+                theView.setLocationRelativeTo(null);
+            }
+        });
+
+        theView.singInPanel.addCancelListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
+                theView.setSize(new Dimension(500,500));
                 theView.setLocationRelativeTo(null);
             }
         });
