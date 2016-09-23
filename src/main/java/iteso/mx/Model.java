@@ -20,26 +20,4 @@ public class Model {
     public Model() {
         ds = new SQLServerDataSource();
     }
-/*
-    try {
-        // Establish the connection.
-        SQLServerDataSource ds = new SQLServerDataSource();
-        ds.setIntegratedSecurity(true);
-        ds.setServerName("localhost");
-        ds.setPortNumber(1433);
-        ds.setDatabaseName("AdventureWorks");
-        con = ds.getConnection();
-    }
-
-    // Handle any errors that may have occurred.
-	    	catch (Exception e) {
-        e.printStackTrace();
-    }
-
-	   	finally {
-        if (rs != null) try { rs.close(); } catch(Exception e) {}
-        if (cstmt != null) try { cstmt.close(); } catch(Exception e) {}
-        if (con != null) try { con.close(); } catch(Exception e) {}
-    }*/
-
 }

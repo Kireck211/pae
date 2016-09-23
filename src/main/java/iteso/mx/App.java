@@ -11,12 +11,10 @@ public class App {
         theView = new View();
         theController = new Controller(theModel,theView);
         connect();
-
     }
 
     public static void main(String args[]) {
         App mainApp = new App();
-
     }
 
     public void connect() {
@@ -27,7 +25,7 @@ public class App {
         try {
             theModel.con = theModel.ds.getConnection();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }
