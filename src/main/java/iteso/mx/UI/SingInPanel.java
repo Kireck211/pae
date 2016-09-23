@@ -15,26 +15,9 @@ public class SingInPanel extends JPanel{
         userJLabel = new JLabel("Usuario:");
         userJTextField = new JTextField(15);
         passwordJLabel = new JLabel("Contraseña");
-        passwordJTextField = new JTextField();
+        passwordJTextField = new JTextField(15);
         forgotten = new JButton("¿Olvidaste tu contraseña?");
 
-        SpringLayout tableLayout = new SpringLayout();
-
-
-
-        JPanel tableLabelTextField = new JPanel(tableLayout);
-
-        tableLabelTextField.add(userJLabel);
-        tableLabelTextField.add(userJTextField);
-
-//        tableLayout.putConstraint(SpringLayout.WEST, userJLabel, SpringLayout.NORTH, tableLayout.getConstraint(tableLabelTextField));
-
-        setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
-
-        add(tableLabelTextField);
-
-
-        /*
         setLayout(new GridBagLayout());
         GridBagConstraints gb = new GridBagConstraints();
 
@@ -47,11 +30,17 @@ public class SingInPanel extends JPanel{
 
         add(userJLabel, gb);
 
+        gb.gridy = 1;
+        add(passwordJLabel, gb);
+
 
         gb.gridx = 1;
+        gb.gridy = 0;
         gb.fill = GridBagConstraints.HORIZONTAL;
         gb.insets = new Insets(0,0,0,20);
         add(userJTextField, gb);
+
+        gb.insets = new Insets(0,0,0,0);
 
 
         gb.fill = GridBagConstraints.NONE;
@@ -67,14 +56,15 @@ public class SingInPanel extends JPanel{
 
         gb.gridx = 2;
         gb.gridy = 3;
+        gb.fill = GridBagConstraints.HORIZONTAL;
         add(passwordJTextField, gb);
 
-        /*singIn = new JButton("Iniciar Sesión");
-        gb.weightx = 1;
+        singIn = new JButton("Iniciar Sesión");
+        gb.weightx = 2;
         gb.fill = GridBagConstraints.HORIZONTAL;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.gridy = 4;
         gb.insets = new Insets(20,0,0,0);
-        add(singIn, gb);*/
+        add(singIn, gb);
     }
 }
