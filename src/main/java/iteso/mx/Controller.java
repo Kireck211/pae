@@ -93,6 +93,7 @@ public class Controller {
     public void addRegistrationActionListeners() {
         theView.registrationPanel.addOkListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                theView.registrationPanel.eraseData();
                 String userName = theView.registrationPanel.getUserTextField();
                 String password = theView.registrationPanel.getPasswordTextField();
                 if(isUserNameAccepted(userName)) {
@@ -115,6 +116,7 @@ public class Controller {
 
         theView.registrationPanel.addCancelListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                theView.registrationPanel.eraseData();
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
                 theView.setSize(new Dimension(500,500));
