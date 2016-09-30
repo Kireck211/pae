@@ -1,3 +1,3 @@
 # pae
 
-by Aldo Moises Ponce Briseño and Erick De Santiago Anaya
+by Aldo Moises Ponce Briseño, Rogelio Miguel Hernández Sandoval and Erick De Santiago Anaya
