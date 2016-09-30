@@ -93,6 +93,19 @@ public class Controller {
     public void addRegistrationActionListeners() {
         theView.registrationPanel.addOkListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                String userName = theView.registrationPanel.getUserTextField();
+                String password = theView.registrationPanel.getPasswordTextField();
+                if(isUserNameAccepted(userName)) {
+                    if(isPasswordSecure(password)) {
+
+                    }
+                    else {
+
+                    }
+                } else {
+
+                }
+
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
                 theView.setSize(new Dimension(500,500));
@@ -108,5 +121,13 @@ public class Controller {
                 theView.setLocationRelativeTo(null);
             }
         });
+    }
+
+    public boolean isUserNameAccepted(String userName) {
+        return true;
+    }
+
+    public boolean isPasswordSecure(String password) {
+        return true;
     }
 }

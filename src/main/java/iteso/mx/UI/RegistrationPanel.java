@@ -18,8 +18,8 @@ public class RegistrationPanel extends JPanel {
     public RegistrationPanel() {
         userJLabel = new JLabel("Usuario:");
         passwordJLabel = new JLabel("Contraseña:");
-        userJTextField = new JTextField(15);
-        passwordJTextField = new JTextField(15);
+        userJTextField = new JTextField(20);
+        passwordJTextField = new JTextField(20);
         oKJButton = new JButton("Registrar");
         cancelJButton = new JButton("Cancelar");
 
@@ -30,6 +30,7 @@ public class RegistrationPanel extends JPanel {
         gb.gridy = 2;
         gb.weightx = 1;
         gb.weighty = 1;
+        gb.insets = new Insets(0,20,0,0);
         gb.fill = GridBagConstraints.NONE;
         add(userJLabel, gb);
 
@@ -38,6 +39,7 @@ public class RegistrationPanel extends JPanel {
 
         gb.gridx = 1;
         gb.gridy = 2;
+        gb.insets = new Insets(0,0,0,20);
         gb.fill = GridBagConstraints.HORIZONTAL;
         add(userJTextField, gb);
 
@@ -46,10 +48,11 @@ public class RegistrationPanel extends JPanel {
 
         gb.gridx = 0;
         gb.gridy = 4;
-        gb.fill = GridBagConstraints.NONE;
+        gb.gridwidth = 2;
+        gb.insets = new Insets(0,20,0,20);
         add(oKJButton, gb);
 
-        gb.gridx = 1;
+        gb.gridy = 5;
         add(cancelJButton, gb);
 
     }
@@ -60,5 +63,18 @@ public class RegistrationPanel extends JPanel {
 
     public void addCancelListener(ActionListener actionListener) {
         cancelJButton.addActionListener(actionListener);
+    }
+
+    public void eraseData() {
+        userJTextField.setText("");
+        passwordJTextField.setText("");
+    }
+
+    public String getUserTextField() {
+        return userJTextField.getText();
+    }
+
+    public String getPasswordTextField() {
+        return passwordJTextField.getText();
     }
 }
