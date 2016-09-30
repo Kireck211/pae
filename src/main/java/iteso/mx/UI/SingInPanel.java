@@ -61,6 +61,19 @@ public class SingInPanel extends JPanel{
         add(cancel, gb);
     }
 
+    public void eraseData() {
+        userJTextField.setText("");
+        passwordJTextField.setText("");
+    }
+
+    public void addForgottenPasswordListener(ActionListener actionListener) {
+        forgotten.addActionListener(actionListener);
+    }
+
+    public void addSignInListener(ActionListener actionListener) {
+        singIn.addActionListener(actionListener);
+    }
+
     public void addCancelListener(ActionListener actionListener) {
         cancel.addActionListener(actionListener);
     }

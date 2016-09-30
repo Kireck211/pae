@@ -37,4 +37,8 @@ public class WelcomePanel extends JPanel{
         singInJButton.addActionListener(actionListener);
     }
 
+    public void addSignUpListener(ActionListener actionListener) {
+        singUp.addActionListener(actionListener);
+    }
+
 }

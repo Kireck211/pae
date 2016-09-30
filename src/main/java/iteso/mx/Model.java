@@ -1,6 +1,8 @@
 package iteso.mx;
 
 
+import iteso.mx.emails.SendEmail;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,10 +14,11 @@ import java.sql.Statement;
  */
 public class Model {
 
-    public static final String DEFAULT_DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    public static final String DEFAULT_URL = "jdbc:sqlserver://localhost:1433;databaseName=Test";
+    private static final String DEFAULT_DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    private static final String DEFAULT_URL = "jdbc:sqlserver://localhost:1433;databaseName=Test";
     private static final String DEFAULT_USERNAME = "test";
     private static final String DEFAULT_PASSWORD = "123456";
+    public SendEmail sendEmail;
     public Connection connection;
     public Statement statement;
     public ResultSet resultSet;
@@ -27,6 +30,7 @@ public class Model {
             "  FROM [Test].[dbo].[ClientePropiedad]";
 
     public Model() {
+        sendEmail = new SendEmail();
         connection = null;
         statement = null;
         resultSet = null;
