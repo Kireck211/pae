@@ -22,12 +22,6 @@ public class Model {
     public Connection connection;
     public Statement statement;
     public ResultSet resultSet;
-    public String a = "SELECT TOP 1000 [IDCliente]\n" +
-            "      ,[IDPropiedad]\n" +
-            "      ,[FechaInicio]\n" +
-            "      ,[FechaFin]\n" +
-            "      ,[Renta]\n" +
-            "  FROM [Test].[dbo].[ClientePropiedad]";
 
     public Model() {
         sendEmail = new SendEmail();
@@ -42,7 +36,6 @@ public class Model {
             Class.forName(DEFAULT_DRIVER_CLASS);
             connection = DriverManager.getConnection(DEFAULT_URL, DEFAULT_USERNAME, DEFAULT_PASSWORD);
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(a);
 
         } catch (Exception e) {
             e.printStackTrace();

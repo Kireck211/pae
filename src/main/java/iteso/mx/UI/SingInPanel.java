@@ -77,4 +77,20 @@ public class SingInPanel extends JPanel{
     public void addCancelListener(ActionListener actionListener) {
         cancel.addActionListener(actionListener);
     }
+
+    public String getUserJTextField() {
+        return userJTextField.getText();
+    }
+
+    public String getPasswordJTextField() {
+        return passwordJTextField.getText();
+    }
+
+    public void setUserJLabel(String text) {
+        userJTextField.setText(text);
+    }
+
+    public void setPasswordJLabel(String text) {
+        passwordJLabel.setText(text);
+    }
 }
