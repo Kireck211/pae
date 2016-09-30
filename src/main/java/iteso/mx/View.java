@@ -5,6 +5,7 @@ import iteso.mx.UI.WelcomePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
 
 public class View extends JFrame {
 
@@ -14,6 +15,7 @@ public class View extends JFrame {
     public JPanel windowsPanel;
     public static String WELCOME_PANEL = "welcomePanel";
     public static String SING_IN_PANEL = "singInPanel";
+
 
     public View() {
         welcomePanel = new WelcomePanel();
