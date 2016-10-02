@@ -68,19 +68,18 @@ public class Controller {
     }
 
     public void addSignInActionListeners() {
-        theView.singInPanel.addCancelListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        theView.singInPanel.addCancelListener((e) -> {
                 theView.singInPanel.eraseData();
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
                 theView.setSize(new Dimension(500,500));
                 theView.setLocationRelativeTo(null);
-            }
+
         });
 
-        theView.singInPanel.addSignInListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
+        theView.singInPanel.addSignInListener((e) -> {
+            theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
+            theView.setSize(new Dimension(500,500));
+            theView.setLocationRelativeTo(null);
         });
 
         theView.singInPanel.addForgottenPasswordListener(new ActionListener() {

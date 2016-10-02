@@ -1,5 +1,9 @@
 package iteso.mx;
 
+import iteso.mx.UI.SalesPanel;
+
+import javax.swing.*;
+
 public class App {
 
     private Controller theController;
