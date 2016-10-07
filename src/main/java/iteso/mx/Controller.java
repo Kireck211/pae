@@ -1,6 +1,7 @@
 package iteso.mx;
 
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -68,18 +69,29 @@ public class Controller {
     }
 
     public void addSignInActionListeners() {
-        theView.singInPanel.addCancelListener((e) -> {
+        theView.singInPanel.addCancelListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 theView.singInPanel.eraseData();
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
-                theView.setSize(new Dimension(500,500));
+                theView.setSize(new Dimension(500, 500));
                 theView.setLocationRelativeTo(null);
-
+            }
         });
 
-        theView.singInPanel.addSignInListener((e) -> {
-            theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
-            theView.setSize(new Dimension(500,500));
-            theView.setLocationRelativeTo(null);
+        theView.singInPanel.addSignInListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String userName = theView.singInPanel.getUserJTextField();
+                String password = theView.singInPanel.getPasswordJTextField();
+
+                String realPass = theModel.getPassword(userName);
+                if (realPass != "No connection" && realPass != "" && realPass.equals(password)) {
+                    theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
+                    theView.setSize(new Dimension(500,500));
+                    theView.setLocationRelativeTo(null);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario y/o contraseña son incorrectos", "Información incorrecta", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         });
 
         theView.singInPanel.addForgottenPasswordListener(new ActionListener() {

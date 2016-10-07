@@ -15,7 +15,7 @@ import java.sql.Statement;
 public class Model {
 
     private static final String DEFAULT_DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String DEFAULT_URL = "jdbc:sqlserver://localhost:1433;databaseName=Test";
+    private static final String DEFAULT_URL = "jdbc:sqlserver://localhost:1433;databaseName=AUTOBUS";
     private static final String DEFAULT_USERNAME = "test";
     private static final String DEFAULT_PASSWORD = "123456";
     public SendEmail sendEmail;
@@ -40,6 +40,25 @@ public class Model {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getPassword(String username) {
+
+        String queryPassword = "SELECT Contraseña FROM EMPLEADO\n" +
+                "WHERE Usuario = '" + username + "'";
+
+        try {
+            resultSet = statement.executeQuery(queryPassword);
+            if (resultSet.next()) {
+                return resultSet.getString(1);
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "No connection";
     }
 
     public void closeConnection() {
