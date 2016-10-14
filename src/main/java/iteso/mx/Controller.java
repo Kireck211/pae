@@ -88,6 +88,8 @@ public class Controller {
                     theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
                     theView.setSize(new Dimension(500,500));
                     theView.setLocationRelativeTo(null);
+                    addCountries();
+                    addSellActionListeners();
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario y/o contraseña son incorrectos", "Información incorrecta", JOptionPane.ERROR_MESSAGE);
                 }
@@ -142,5 +144,32 @@ public class Controller {
 
     public boolean isPasswordSecure(String password) {
         return true;
+    }
+
+    public void addCountries() {
+        theView.salesPanel.sellPanel.addCountries(theModel.getCountries());
+    }
+
+    public void addStates() {
+        int index = theView.salesPanel.sellPanel.stateBox.getSelectedIndex();
+        theView.salesPanel.sellPanel.addStates(theModel.getStates(theView.salesPanel.sellPanel.stateID.get(index)));
+    }
+
+    public void addSellActionListeners() {
+
+        theView.salesPanel.sellPanel.addCountryComboBoxKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    addStates();
+                }
+            }
+        });
+
+        theView.salesPanel.sellPanel.addStateComboBoxActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 }

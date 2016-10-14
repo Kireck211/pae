@@ -1,9 +1,11 @@
 package iteso.mx.UI;
 
 import iteso.mx.UI.SalesTabs.ModifySell;
+import iteso.mx.UI.SalesTabs.Refund;
 import iteso.mx.UI.SalesTabs.Sell;
 
 import javax.swing.*;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 /**
@@ -12,29 +14,20 @@ import java.awt.*;
 public class SalesPanel extends JPanel {
     public Sell sellPanel;
     public ModifySell modifySellPanel;
+    public Refund refundPanel;
+    public JTabbedPane tabbedPane;
 
     public SalesPanel() {
         super(new GridLayout(1, 1));
-        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane = new JTabbedPane();
         sellPanel = new Sell();
         modifySellPanel = new ModifySell();
+        refundPanel = new Refund();
 
-        JComponent newSale = makeComponent("Tab1");
+
         tabbedPane.add("Nueva Venta", sellPanel);
-
-        JComponent modifySale = makeComponent("Tab2");
-        tabbedPane.add("Modificar Venta",modifySale);
+        tabbedPane.add("Modificar Venta",modifySellPanel);
 
         this.add(tabbedPane);
     }
-
-    private JComponent makeComponent(String name){
-        JPanel panel = new JPanel();
-        JLabel filler = new JLabel(name);
-        filler.setHorizontalAlignment(JLabel.CENTER);
-        panel.setLayout(new GridLayout(1, 1));
-        panel.add(filler);
-        return panel;
-    }
-
 }
