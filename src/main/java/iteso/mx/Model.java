@@ -64,32 +64,14 @@ public class Model {
         return "No connection";
     }
 
-    public HashMap<Integer ,String> getCountries() {
-        HashMap<Integer, String> countries = new HashMap<Integer, String>();
 
-        String queryCountries = "SELECT [IDPais]\n" +
-                "      ,[Nombre]\n" +
-                "FROM [AUTOBUS].[dbo].[PAIS]";
-
-        try {
-            resultSet = statement.executeQuery(queryCountries);
-            while(resultSet.next()) {
-                countries.put(resultSet.getInt("IDPais"), resultSet.getString("Nombre"));
-            }
-            return countries;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return countries;
-    }
-
-    public HashMap<Integer, String> getStates(Integer countryID) {
+    public HashMap<Integer, String> getStates() {
         HashMap<Integer, String> states = new HashMap<Integer, String>();
 
         String queryStates ="SELECT [IDEstado],\n" +
                 "\t[Nombre]\n" +
                 "FROM [AUTOBUS].[dbo].[ESTADO]\n" +
-                "WHERE IDPais="+ countryID.toString();
+                "WHERE IDPais=1\n";
 
         try {
             resultSet = statement.executeQuery(queryStates);

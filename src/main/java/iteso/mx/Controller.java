@@ -82,16 +82,8 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 String userName = theView.singInPanel.getUserJTextField();
                 String password = theView.singInPanel.getPasswordJTextField();
-
-                String realPass = theModel.getPassword(userName);
-                if (realPass != "No connection" && realPass != "" && realPass.equals(password)) {
-                    theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
-                    theView.setSize(new Dimension(500,500));
-                    theView.setLocationRelativeTo(null);
-                    addCountries();
-                    addSellActionListeners();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario y/o contraseña son incorrectos", "Información incorrecta", JOptionPane.ERROR_MESSAGE);
+                if(isUserPasswordCorrect(userName, password)){
+                    showSalesPanel();
                 }
             }
         });
@@ -99,6 +91,44 @@ public class Controller {
         theView.singInPanel.addForgottenPasswordListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 theModel.sendEmail.sendMessage();
+            }
+        });
+
+        theView.singInPanel.addKeyListeners(new KeyListener() {
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String user = theView.singInPanel.getUserJTextField();
+                    String password = theView.singInPanel.getPasswordJTextField();
+                    if (isUserPasswordCorrect(user, password)) {
+                        showSalesPanel();
+                    }
+                }
+            }
+        }, new KeyListener() {
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String user = theView.singInPanel.getUserJTextField();
+                    String password = theView.singInPanel.getPasswordJTextField();
+                    if (isUserPasswordCorrect(user, password)) {
+                        showSalesPanel();
+                    }
+                }
             }
         });
     }
@@ -146,30 +176,34 @@ public class Controller {
         return true;
     }
 
-    public void addCountries() {
-        theView.salesPanel.sellPanel.addCountries(theModel.getCountries());
+    public boolean isUserPasswordCorrect(String user, String password) {
+        String realPass = theModel.getPassword(user);
+        if (realPass != "No connection" && realPass != "" && realPass.equals(password)) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario y/o contraseña son incorrectos", "Información incorrecta", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
     public void addStates() {
-        int index = theView.salesPanel.sellPanel.stateBox.getSelectedIndex();
-        theView.salesPanel.sellPanel.addStates(theModel.getStates(theView.salesPanel.sellPanel.stateID.get(index)));
+        theView.salesPanel.sellPanel.addStates(theModel.getStates());
     }
 
     public void addSellActionListeners() {
 
-        theView.salesPanel.sellPanel.addCountryComboBoxKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    addStates();
-                }
-            }
-        });
-
         theView.salesPanel.sellPanel.addStateComboBoxActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                System.out.println(theView.salesPanel.sellPanel.stateComboBox.getSelectedIndex());
             }
         });
+    }
+
+    public void showSalesPanel() {
+        theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
+        theView.setSize(new Dimension(500,500));
+        theView.setLocationRelativeTo(null);
+        addStates();
+        addSellActionListeners();
     }
 }

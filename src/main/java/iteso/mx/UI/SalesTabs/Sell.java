@@ -15,11 +15,11 @@ public class Sell extends JPanel {
     public JLabel clientNameLabel;
     public JTextField clientNameField;
     public JLabel countryLabel;
-    public JComboBox<String> countryBox;
-    public ArrayList<Integer> countryID;
+    public JComboBox<String> stateComboBox;
+    public ArrayList<Integer> stateIDs;
     public JLabel stateLabel;
-    public JComboBox<String> stateBox;
-    public ArrayList<Integer> stateID;
+    public JComboBox<String> cityCBox;
+    public ArrayList<Integer> cityIDs;
 
 
     public Sell() {
@@ -28,13 +28,11 @@ public class Sell extends JPanel {
 
         clientNameLabel = new JLabel("Nombre:");
         clientNameField = new JTextField(15);
-        countryLabel = new JLabel("País:");
-        countryBox = new JComboBox<String>();
-        countryID = new ArrayList<Integer>();
-        stateLabel = new JLabel("Estado:");
-        stateBox = new JComboBox<String>();
-
-        countryBox.setEditable(true);
+        countryLabel = new JLabel("Estado:");
+        stateComboBox = new JComboBox<String>();
+        stateIDs = new ArrayList<Integer>();
+        stateLabel = new JLabel("Ciudad:");
+        cityCBox = new JComboBox<String>();
 
         gb.gridx = 0;
         gb.gridy = 0;
@@ -50,40 +48,24 @@ public class Sell extends JPanel {
         add(countryLabel, gb);
 
         gb.gridx = 1;
-        add(countryBox, gb);
+        add(stateComboBox, gb);
 
         gb.gridx = 0;
         gb.gridy = 2;
         add(stateLabel, gb);
 
         gb.gridx = 1;
-        add(stateBox, gb);
+        add(cityCBox, gb);
     }
 
-    public void addCountries(HashMap<Integer, String> countries) {
+    public void addStates(HashMap<Integer, String> countries) {
         for(Integer key: countries.keySet()) {
-            countryID.add(key);
-            countryBox.addItem(countries.get(key));
+            stateIDs.add(key);
+            stateComboBox.addItem(countries.get(key));
         }
     }
 
-    public void addStates(HashMap<Integer, String> states) {
-        for(Integer key: states.keySet()) {
-            stateID.add(key);
-            countryBox.addItem(states.get(key));
-        }
-        countryBox.setSelectedIndex(0);
-    }
-
-    public void addCountryComboBoxKeyListener (KeyAdapter keyAdapter) {
-        countryBox.getEditor().getEditorComponent().addKeyListener(keyAdapter);
-    }
-
-    public void addCountryComboBoxActionListener(ActionListener actionListener){
-        countryBox.addActionListener(actionListener);
-    }
-
-    public void addStateComboBoxActionListener(ActionListener actionListener) {
-        stateBox.addActionListener(actionListener);
+    public void addStateComboBoxActionListener(ActionListener actionListener){
+        stateComboBox.addActionListener(actionListener);
     }
 }
