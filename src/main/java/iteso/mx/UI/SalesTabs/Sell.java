@@ -4,20 +4,17 @@ package iteso.mx.UI.SalesTabs;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Erick on 06/10/2016.
- */
+
 public class Sell extends JPanel {
     public JLabel clientNameLabel;
     public JTextField clientNameField;
-    public JLabel countryLabel;
+    public JLabel stateLabel;
     public JComboBox<String> stateComboBox;
     public ArrayList<Integer> stateIDs;
-    public JLabel stateLabel;
+    public JLabel cityLabel;
     public JComboBox<String> cityCBox;
     public ArrayList<Integer> cityIDs;
 
@@ -28,11 +25,12 @@ public class Sell extends JPanel {
 
         clientNameLabel = new JLabel("Nombre:");
         clientNameField = new JTextField(15);
-        countryLabel = new JLabel("Estado:");
+        stateLabel = new JLabel("Estado:");
         stateComboBox = new JComboBox<String>();
         stateIDs = new ArrayList<Integer>();
-        stateLabel = new JLabel("Ciudad:");
+        cityLabel = new JLabel("Ciudad:");
         cityCBox = new JComboBox<String>();
+        cityIDs = new ArrayList<Integer>();
 
         gb.gridx = 0;
         gb.gridy = 0;
@@ -45,27 +43,35 @@ public class Sell extends JPanel {
 
         gb.gridx = 0;
         gb.gridy = 1;
-        add(countryLabel, gb);
+        add(stateLabel, gb);
 
         gb.gridx = 1;
         add(stateComboBox, gb);
 
         gb.gridx = 0;
         gb.gridy = 2;
-        add(stateLabel, gb);
+        add(cityLabel, gb);
 
         gb.gridx = 1;
         add(cityCBox, gb);
     }
 
-    public void addStates(HashMap<Integer, String> countries) {
-        for(Integer key: countries.keySet()) {
+    public void addStates(HashMap<Integer, String> states) {
+        for(Integer key: states.keySet()) {
             stateIDs.add(key);
-            stateComboBox.addItem(countries.get(key));
+            stateComboBox.addItem(states.get(key));
         }
     }
 
     public void addStateComboBoxActionListener(ActionListener actionListener){
         stateComboBox.addActionListener(actionListener);
+    }
+
+    public void addCities(HashMap<Integer, String> cities) {
+        for(Integer key: cities.keySet()) {
+            cityIDs.add(key);
+            cityCBox.addItem(cities.get(key));
+//            System.out.println(key);
+        }
     }
 }

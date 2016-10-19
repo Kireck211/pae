@@ -3,18 +3,12 @@ package iteso.mx;
 
 import iteso.mx.emails.SendEmail;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
-/**
- * Created by Erick on 23/09/2016.
- */
 public class Model {
 
     private static final String DEFAULT_DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -83,6 +77,25 @@ public class Model {
             e.printStackTrace();
         }
         return states;
+    }
+
+    public HashMap<Integer, String> getCities(int stateID) {
+        HashMap<Integer, String> cities = new HashMap<Integer, String>();
+
+        String queryCities = "SELECT *\n" +
+                "  FROM [AUTOBUS].[dbo].[CIUDAD]\n" +
+                "  WHERE IDEstado=" + stateID;
+
+        try {
+            resultSet = statement.executeQuery(queryCities);
+            while(resultSet.next())
+                cities.put(resultSet.getInt("IDCiudad"), resultSet.getString("Nombre"));
+            return cities;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cities;
     }
 
     public void closeConnection() {

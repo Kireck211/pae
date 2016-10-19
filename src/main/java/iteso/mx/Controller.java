@@ -190,11 +190,18 @@ public class Controller {
         theView.salesPanel.sellPanel.addStates(theModel.getStates());
     }
 
+    public void addCities() {
+        int selectedItem = theView.salesPanel.sellPanel.stateComboBox.getSelectedIndex();
+        int index = theView.salesPanel.sellPanel.stateIDs.get(selectedItem);
+        theView.salesPanel.sellPanel.addCities(theModel.getCities(index));
+    }
+
     public void addSellActionListeners() {
 
         theView.salesPanel.sellPanel.addStateComboBoxActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(theView.salesPanel.sellPanel.stateComboBox.getSelectedIndex());
+//                System.out.println(theView.salesPanel.sellPanel.stateComboBox.getSelectedIndex());
+                addCities();
             }
         });
     }

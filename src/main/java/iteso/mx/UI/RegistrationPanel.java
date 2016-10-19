@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-/**
- * Created by Erick on 29/09/2016.
- */
+
 public class RegistrationPanel extends JPanel {
     private JLabel userJLabel;
     private JLabel passwordJLabel;
