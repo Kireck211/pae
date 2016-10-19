@@ -57,6 +57,10 @@ public class Sell extends JPanel {
     }
 
     public void addStates(HashMap<Integer, String> states) {
+        if(stateIDs != null)
+            stateIDs = new ArrayList<Integer>();
+        if(stateComboBox.getItemCount() != 0)
+            stateComboBox.removeAllItems();
         for(Integer key: states.keySet()) {
             stateIDs.add(key);
             stateComboBox.addItem(states.get(key));
@@ -68,6 +72,10 @@ public class Sell extends JPanel {
     }
 
     public void addCities(HashMap<Integer, String> cities) {
+        if(cityIDs != null)
+            cityIDs = new ArrayList<Integer>();
+        if(cityCBox.getItemCount() != 0)
+            cityCBox.removeAllItems();
         for(Integer key: cities.keySet()) {
             cityIDs.add(key);
             cityCBox.addItem(cities.get(key));
