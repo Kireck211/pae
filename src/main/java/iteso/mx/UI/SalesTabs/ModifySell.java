@@ -7,9 +7,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.Vector;
 
-/**
- * Created by Erick on 06/10/2016.
- */
+
 public class ModifySell extends JPanel{
 
 

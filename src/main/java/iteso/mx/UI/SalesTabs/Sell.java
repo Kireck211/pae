@@ -4,22 +4,19 @@ package iteso.mx.UI.SalesTabs;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Erick on 06/10/2016.
- */
+
 public class Sell extends JPanel {
     public JLabel clientNameLabel;
     public JTextField clientNameField;
-    public JLabel countryLabel;
-    public JComboBox<String> countryBox;
-    public ArrayList<Integer> countryID;
     public JLabel stateLabel;
-    public JComboBox<String> stateBox;
-    public ArrayList<Integer> stateID;
+    public JComboBox<String> stateComboBox;
+    public ArrayList<Integer> stateIDs;
+    public JLabel cityLabel;
+    public JComboBox<String> cityCBox;
+    public ArrayList<Integer> cityIDs;
 
 
     public Sell() {
@@ -28,13 +25,12 @@ public class Sell extends JPanel {
 
         clientNameLabel = new JLabel("Nombre:");
         clientNameField = new JTextField(15);
-        countryLabel = new JLabel("País:");
-        countryBox = new JComboBox<String>();
-        countryID = new ArrayList<Integer>();
         stateLabel = new JLabel("Estado:");
-        stateBox = new JComboBox<String>();
-
-        countryBox.setEditable(true);
+        stateComboBox = new JComboBox<String>();
+        stateIDs = new ArrayList<Integer>();
+        cityLabel = new JLabel("Ciudad:");
+        cityCBox = new JComboBox<String>();
+        cityIDs = new ArrayList<Integer>();
 
         gb.gridx = 0;
         gb.gridy = 0;
@@ -47,43 +43,43 @@ public class Sell extends JPanel {
 
         gb.gridx = 0;
         gb.gridy = 1;
-        add(countryLabel, gb);
-
-        gb.gridx = 1;
-        add(countryBox, gb);
-
-        gb.gridx = 0;
-        gb.gridy = 2;
         add(stateLabel, gb);
 
         gb.gridx = 1;
-        add(stateBox, gb);
-    }
+        add(stateComboBox, gb);
 
-    public void addCountries(HashMap<Integer, String> countries) {
-        for(Integer key: countries.keySet()) {
-            countryID.add(key);
-            countryBox.addItem(countries.get(key));
-        }
+        gb.gridx = 0;
+        gb.gridy = 2;
+        add(cityLabel, gb);
+
+        gb.gridx = 1;
+        add(cityCBox, gb);
     }
 
     public void addStates(HashMap<Integer, String> states) {
+        if(stateIDs != null)
+            stateIDs = new ArrayList<Integer>();
+        if(stateComboBox.getItemCount() != 0)
+            stateComboBox.removeAllItems();
         for(Integer key: states.keySet()) {
-            stateID.add(key);
-            countryBox.addItem(states.get(key));
+            stateIDs.add(key);
+            stateComboBox.addItem(states.get(key));
         }
-        countryBox.setSelectedIndex(0);
     }
 
-    public void addCountryComboBoxKeyListener (KeyAdapter keyAdapter) {
-        countryBox.getEditor().getEditorComponent().addKeyListener(keyAdapter);
+    public void addStateComboBoxActionListener(ActionListener actionListener){
+        stateComboBox.addActionListener(actionListener);
     }
 
-    public void addCountryComboBoxActionListener(ActionListener actionListener){
-        countryBox.addActionListener(actionListener);
-    }
-
-    public void addStateComboBoxActionListener(ActionListener actionListener) {
-        stateBox.addActionListener(actionListener);
+    public void addCities(HashMap<Integer, String> cities) {
+        if(cityIDs != null)
+            cityIDs = new ArrayList<Integer>();
+        if(cityCBox.getItemCount() != 0)
+            cityCBox.removeAllItems();
+        for(Integer key: cities.keySet()) {
+            cityIDs.add(key);
+            cityCBox.addItem(cities.get(key));
+//            System.out.println(key);
+        }
     }
 }
