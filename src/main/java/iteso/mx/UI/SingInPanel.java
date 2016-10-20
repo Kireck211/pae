@@ -3,6 +3,7 @@ package iteso.mx.UI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 public class SingInPanel extends JPanel{
     private JLabel userJLabel;
@@ -92,5 +93,10 @@ public class SingInPanel extends JPanel{
 
     public void setPasswordJLabel(String text) {
         passwordJLabel.setText(text);
+    }
+
+    public void addKeyListeners(KeyListener userListener, KeyListener passwordListener) {
+        passwordJTextField.addKeyListener(passwordListener);
+        userJTextField.addKeyListener(userListener);
     }
 }

@@ -8,9 +8,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-/**
- * Created by simio on 02/10/2016.
- */
 public class SalesPanel extends JPanel {
     public Sell sellPanel;
     public ModifySell modifySellPanel;

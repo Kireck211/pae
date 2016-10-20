@@ -3,15 +3,11 @@ package iteso.mx;
 
 import iteso.mx.emails.SendEmail;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-// Módulo donde dará y/o suministrará solo la información
 
 public class Model {
 
@@ -45,7 +41,8 @@ public class Model {
 
     public String getPassword(String username) {
 
-        String queryPassword = "SELECT Contraseña FROM EMPLEADO\n" + "WHERE Usuario = '" + username + "'";
+        String queryPassword = "SELECT Contraseña FROM EMPLEADO\n" +
+                "WHERE Usuario = '" + username + "'";
 
         try {
             resultSet = statement.executeQuery(queryPassword);
@@ -61,28 +58,14 @@ public class Model {
         return "No connection";
     }
 
-    public HashMap<Integer ,String> getCountries() {
-        HashMap<Integer, String> countries = new HashMap<Integer, String>();
 
-        String queryCountries = "SELECT [IDPais]\n" + " ,[Nombre]\n" + "FROM [AUTOBUS].[dbo].[PAIS]";
-
-        try {
-            resultSet = statement.executeQuery(queryCountries);
-            while(resultSet.next()) {
-                countries.put(resultSet.getInt("IDPais"), resultSet.getString("Nombre"));
-            }
-            return countries;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return countries;
-    }
-
-    public HashMap<Integer, String> getStates(Integer countryID) {
+    public HashMap<Integer, String> getStates() {
         HashMap<Integer, String> states = new HashMap<Integer, String>();
 
-        String queryStates ="SELECT [IDEstado],\n" + "\t[Nombre]\n" + "FROM [AUTOBUS].[dbo].[ESTADO]\n" +
-                "WHERE IDPais="+ countryID.toString();
+        String queryStates ="SELECT [IDEstado],\n" +
+                "\t[Nombre]\n" +
+                "FROM [AUTOBUS].[dbo].[ESTADO]\n" +
+                "WHERE IDPais=1\n";
 
         try {
             resultSet = statement.executeQuery(queryStates);
@@ -94,6 +77,25 @@ public class Model {
             e.printStackTrace();
         }
         return states;
+    }
+
+    public HashMap<Integer, String> getCities(int stateID) {
+        HashMap<Integer, String> cities = new HashMap<Integer, String>();
+
+        String queryCities = "SELECT *\n" +
+                "  FROM [AUTOBUS].[dbo].[CIUDAD]\n" +
+                "  WHERE IDEstado=" + stateID;
+
+        try {
+            resultSet = statement.executeQuery(queryCities);
+            while(resultSet.next())
+                cities.put(resultSet.getInt("IDCiudad"), resultSet.getString("Nombre"));
+            return cities;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cities;
     }
 
     public void closeConnection() {
@@ -114,4 +116,5 @@ public class Model {
             System.out.println("Connection Closed");
         } catch (Exception e) { e.printStackTrace();}
     }
+
 }
