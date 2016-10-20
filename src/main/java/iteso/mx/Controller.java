@@ -200,7 +200,6 @@ public class Controller {
 
         theView.salesPanel.sellPanel.addStateComboBoxActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                System.out.println(theView.salesPanel.sellPanel.stateComboBox.getSelectedIndex());
                 addCities();
             }
         });
@@ -212,5 +211,6 @@ public class Controller {
         theView.setLocationRelativeTo(null);
         addStates();
         addSellActionListeners();
+        theView.salesPanel.sellPanel.selectDefault();
     }
 }
