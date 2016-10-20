@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+// Módulo donde dará y/o suministrará solo la información
 
-/**
- * Created by Erick on 23/09/2016.
- */
 public class Model {
 
     private static final String DEFAULT_DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -47,8 +45,7 @@ public class Model {
 
     public String getPassword(String username) {
 
-        String queryPassword = "SELECT Contraseña FROM EMPLEADO\n" +
-                "WHERE Usuario = '" + username + "'";
+        String queryPassword = "SELECT Contraseña FROM EMPLEADO\n" + "WHERE Usuario = '" + username + "'";
 
         try {
             resultSet = statement.executeQuery(queryPassword);
@@ -67,9 +64,7 @@ public class Model {
     public HashMap<Integer ,String> getCountries() {
         HashMap<Integer, String> countries = new HashMap<Integer, String>();
 
-        String queryCountries = "SELECT [IDPais]\n" +
-                "      ,[Nombre]\n" +
-                "FROM [AUTOBUS].[dbo].[PAIS]";
+        String queryCountries = "SELECT [IDPais]\n" + " ,[Nombre]\n" + "FROM [AUTOBUS].[dbo].[PAIS]";
 
         try {
             resultSet = statement.executeQuery(queryCountries);
@@ -86,9 +81,7 @@ public class Model {
     public HashMap<Integer, String> getStates(Integer countryID) {
         HashMap<Integer, String> states = new HashMap<Integer, String>();
 
-        String queryStates ="SELECT [IDEstado],\n" +
-                "\t[Nombre]\n" +
-                "FROM [AUTOBUS].[dbo].[ESTADO]\n" +
+        String queryStates ="SELECT [IDEstado],\n" + "\t[Nombre]\n" + "FROM [AUTOBUS].[dbo].[ESTADO]\n" +
                 "WHERE IDPais="+ countryID.toString();
 
         try {

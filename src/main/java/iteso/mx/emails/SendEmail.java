@@ -1,8 +1,5 @@
 package iteso.mx.emails;
 
-/**
- * Created by Erick on 29/09/2016.
- */
 // File Name SendEmail.java
 
 import java.util.*;
@@ -19,10 +16,10 @@ public class SendEmail {
 
     public SendEmail() {
         // Recipient's email ID needs to be mentioned.
-        to = "erickdesantiago11@gmail.com";
+        to = "aldomoypb@gmail.com";
 
         // Sender's email ID needs to be mentioned
-        from = "rastreotechnology@gmail.com";
+        from = "ti679308@iteso.mx";
 
         // Assuming you are sending email from localhost
         host = "localhost";

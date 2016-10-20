@@ -5,7 +5,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+//Módulo donde comparará de manera correcta y/o negativa la información con el módulo Model
+
 public class Controller {
+
     private Model theModel;
     private View theView;
 
