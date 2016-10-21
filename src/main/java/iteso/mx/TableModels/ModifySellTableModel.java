@@ -3,14 +3,16 @@ package iteso.mx.TableModels;
 import iteso.mx.Model;
 
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Vector;
 
 /**
  * Created by Aldo on 20/10/2016.
  */
-public class ModifySellTableModel extends Model implements TableModel {
+public class ModifySellTableModel extends AbstractTableModel {
     String[] names = {"Folio",
             "Fecha",
             "Empleado",
@@ -18,12 +20,22 @@ public class ModifySellTableModel extends Model implements TableModel {
             "Subtotal",
             "IVA",
             "Total"};
-    Vector<String> columnNames = (new Vector<String>(Arrays.asList(names))) ;
+    Vector<String> columnNames;
     Vector<Vector<Object>> data;
+
+   public ModifySellTableModel() {
+
+
+       columnNames = (new Vector<String>(Arrays.asList(names)));
+       data = new Vector<Vector<Object>>();
+
+
+    }
+
 
     @Override
     public int getRowCount() {
-        return 0;
+        return data.size();
     }
 
     @Override
@@ -32,37 +44,14 @@ public class ModifySellTableModel extends Model implements TableModel {
     }
 
     @Override
-    public String getColumnName(int columnIndex) {
-        return columnNames.elementAt(columnIndex);
-    }
-
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        return null;
-    }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
-    }
-
-    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         return data.elementAt(rowIndex).elementAt(columnIndex);
     }
 
-    @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        (data.elementAt(rowIndex)).set(columnIndex, aValue);
+    public void addRow(Vector<Object> row){
+        data.add(row);
+        fireTableRowsInserted(data.size() -1, data.size() - 1);
     }
 
-    @Override
-    public void addTableModelListener(TableModelListener l) {
 
-    }
-
-    @Override
-    public void removeTableModelListener(TableModelListener l) {
-
-    }
 }
