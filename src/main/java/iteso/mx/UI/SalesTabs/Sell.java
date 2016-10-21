@@ -14,12 +14,16 @@ public class Sell extends JPanel {
     public JTextField clientNameField;
     public JLabel srcStateLabel;
     public JLabel destStateLabel;
-    public JComboBox<String> stateComboBox;
-    public ArrayList<Integer> stateIDs;
+    public JComboBox<String> srcStateComboBox;
+    public JComboBox<String> destStateComboBox;
+    public ArrayList<Integer> srcStateIDs;
+    public ArrayList<Integer> destStateIDs;
     public JLabel srcCityLabel;
     public JLabel destCityLabel;
-    public JComboBox<String> cityCBox;
-    public ArrayList<Integer> cityIDs;
+    public JComboBox<String> srcCityCBox;
+    public JComboBox<String> destCityCBox;
+    public ArrayList<Integer> srcCityIDs;
+    public ArrayList<Integer>  destCityIDs;
     public JLabel dateLab;
     public JComboBox<Integer> dayCBox;
     public JComboBox<String> monthCBox;
@@ -34,12 +38,16 @@ public class Sell extends JPanel {
         clientNameField = new JTextField(15);
         srcStateLabel = new JLabel("Estado (Origen):");
         destStateLabel = new JLabel("Estado (Destino):");
-        stateComboBox = new JComboBox<String>();
-        stateIDs = new ArrayList<Integer>();
+        srcStateComboBox = new JComboBox<String>();
+        destStateComboBox = new JComboBox<String>();
+        srcStateIDs = new ArrayList<Integer>();
+        destStateIDs = new ArrayList<Integer>();
         srcCityLabel = new JLabel("Ciudad (Origen):");
         destCityLabel = new JLabel("Ciudad (Destino):");
-        cityCBox = new JComboBox<String>();
-        cityIDs = new ArrayList<Integer>();
+        srcCityCBox = new JComboBox<String>();
+        destCityCBox = new JComboBox<String>();
+        srcCityIDs = new ArrayList<Integer>();
+        destCityIDs = new ArrayList<Integer>();
         dateLab = new JLabel("Fecha:");
         dayCBox = new JComboBox<Integer>();
         monthCBox = new JComboBox<String>();
@@ -77,10 +85,16 @@ public class Sell extends JPanel {
         add(clientNameField, gb);
 
         gb.gridy = 1;
-        add(stateComboBox, gb);
+        add(srcStateComboBox, gb);
 
         gb.gridy = 2;
-        add(cityCBox, gb);
+        add(srcCityCBox, gb);
+
+        gb.gridy = 3;
+        add(destStateComboBox, gb);
+
+        gb.gridy = 4;
+        add(destCityCBox, gb);
 
 
         // Add date in second column
@@ -97,29 +111,50 @@ public class Sell extends JPanel {
     }
 
     public void addStates(HashMap<Integer, String> states) {
-        if(stateIDs != null)
-            stateIDs = new ArrayList<Integer>();
-        if(stateComboBox.getItemCount() != 0)
-            stateComboBox.removeAllItems();
+        if(srcStateIDs != null)
+            srcStateIDs = new ArrayList<Integer>();
+        if(destCityIDs != null)
+            destCityIDs = new ArrayList<Integer>();
+        if(srcStateComboBox.getItemCount() != 0)
+            srcStateComboBox.removeAllItems();
+        if(destStateComboBox.getItemCount() != 0)
+            destStateComboBox.removeAllItems();
         for(Integer key: states.keySet()) {
-            stateIDs.add(key);
-            stateComboBox.addItem(states.get(key));
+            srcStateIDs.add(key);
+            srcStateComboBox.addItem(states.get(key));
+            destStateIDs.add(key);
+            destStateComboBox.addItem(states.get(key));
         }
     }
 
-    public void addStateComboBoxActionListener(ActionListener actionListener){
-        stateComboBox.addActionListener(actionListener);
+    public void addSrcStateComboBoxActionListener(ActionListener actionListener){
+        srcStateComboBox.addActionListener(actionListener);
     }
 
-    public void addCities(HashMap<Integer, String> cities) {
-        if(cityIDs != null)
-            cityIDs = new ArrayList<Integer>();
-        if(cityCBox.getItemCount() != 0)
-            cityCBox.removeAllItems();
+    public void addSrcCities(HashMap<Integer, String> cities) {
+        if(srcCityIDs != null)
+            srcCityIDs = new ArrayList<Integer>();
+        if(srcCityCBox.getItemCount() != 0)
+            srcCityCBox.removeAllItems();
         for(Integer key: cities.keySet()) {
-            cityIDs.add(key);
-            cityCBox.addItem(cities.get(key));
+            srcCityIDs.add(key);
+            srcCityCBox.addItem(cities.get(key));
         }
+    }
+
+    public void addDestCities(HashMap<Integer, String> cities) {
+        if(destCityIDs != null)
+            destCityIDs = new ArrayList<Integer>();
+        if(destCityCBox.getItemCount() != 0)
+            destCityCBox.removeAllItems();
+        for(Integer key: cities.keySet()) {
+            destCityIDs.add(key);
+            destCityCBox.addItem(cities.get(key));
+        }
+    }
+
+    public void addDestStateComboBoxActionListener(ActionListener actionListener) {
+        destStateComboBox.addActionListener(actionListener);
     }
 
     public void addDates() {
@@ -144,7 +179,8 @@ public class Sell extends JPanel {
     }
 
     public void selectDefault() {
-        stateComboBox.setSelectedIndex(0);
+        srcStateComboBox.setSelectedIndex(0);
+        destStateComboBox.setSelectedIndex(1);
         dayCBox.setSelectedIndex(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)-1);
         monthCBox.setSelectedIndex(Calendar.getInstance().get(Calendar.MONTH));
         yearCBox.setSelectedIndex(0);
