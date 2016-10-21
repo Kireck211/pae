@@ -2,11 +2,13 @@ package iteso.mx;
 
 
 import iteso.mx.emails.SendEmail;
+import org.omg.CORBA.Object;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 
 public class Model {
@@ -19,6 +21,7 @@ public class Model {
     public Connection connection;
     public Statement statement;
     public ResultSet resultSet;
+    public int idEmployee;
 
     public Model() {
         sendEmail = new SendEmail();
@@ -26,6 +29,7 @@ public class Model {
         statement = null;
         resultSet = null;
         connect();
+        this.idEmployee = -1;
     }
 
     public void connect() {
@@ -57,7 +61,6 @@ public class Model {
 
         return "No connection";
     }
-
 
     public HashMap<Integer, String> getStates() {
         HashMap<Integer, String> states = new HashMap<Integer, String>();
@@ -96,6 +99,58 @@ public class Model {
         }
 
         return cities;
+    }
+
+    public void registerSell(String date, int numberTickets, int idRoute, int idEmployee, int idClient, String comment) {
+        String executeProcedure = "execute SP_Realizar_Venta '" + date +
+                "'," + numberTickets +
+                "," + idRoute +
+                "," + idEmployee +
+                "," + idClient +
+                ",'" + comment +"'";
+        try {
+            statement.executeQuery(executeProcedure);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getRouteID(String srcCity, String destCity) {
+        String executeProcedure = "execute SP_Ruta_Viaje '" + srcCity + "', '"+ destCity + "'";
+        try {
+            resultSet = statement.executeQuery(executeProcedure);
+            if(!resultSet.wasNull()) {
+                while(resultSet.next())
+                    return resultSet.getInt(1);
+            }
+            else
+                return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public void setIDEmployee(int idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+
+    public int getIDEmployeeDB(String userName) {
+        String query = "SELECT [IDEmpleado]\n" +
+                "  FROM [AUTOBUS].[dbo].[EMPLEADO]\n" +
+                "  WHERE Usuario='" + userName + "'";
+        try {
+            resultSet = statement.executeQuery(query);
+            if(!resultSet.wasNull()) {
+                while(resultSet.next())
+                    return resultSet.getInt("IDEmpleado");
+            }
+            else
+                return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     public void closeConnection() {
