@@ -14,6 +14,7 @@ public class Sell extends JPanel {
     public JTextField clientNameField;
     public JLabel srcStateLabel;
     public JLabel destStateLabel;
+    public JLabel commentJLabel;
     public JComboBox<String> srcStateComboBox;
     public JComboBox<String> destStateComboBox;
     public ArrayList<Integer> srcStateIDs;
@@ -28,6 +29,8 @@ public class Sell extends JPanel {
     public JComboBox<Integer> dayCBox;
     public JComboBox<String> monthCBox;
     public JComboBox<Integer> yearCBox;
+    public JTextArea comment;
+    public JButton sellButton;
 
 
     public Sell() {
@@ -52,6 +55,9 @@ public class Sell extends JPanel {
         dayCBox = new JComboBox<Integer>();
         monthCBox = new JComboBox<String>();
         yearCBox = new JComboBox<Integer>();
+        commentJLabel = new JLabel("Comentarios:");
+        comment = new JTextArea(10, 30);
+        sellButton = new JButton("Realizar venta");
         addDates();
 
         // Add first column
@@ -77,6 +83,9 @@ public class Sell extends JPanel {
         gb.gridy = 5;
         add(dateLab, gb);
 
+        gb.gridy = 6;
+        add(commentJLabel, gb);
+
 
         // Add second column
         gb.gridwidth = 3;
@@ -96,6 +105,9 @@ public class Sell extends JPanel {
         gb.gridy = 4;
         add(destCityCBox, gb);
 
+        gb.gridy = 6;
+        add(comment, gb);
+
 
         // Add date in second column
         gb.gridwidth = 1;
@@ -108,6 +120,14 @@ public class Sell extends JPanel {
 
         gb.gridx = 5;
         add(yearCBox, gb);
+
+        // Add sell button
+        gb.gridx = 1;
+        gb.gridy = 7;
+        gb.gridwidth = 5;
+        gb.fill = GridBagConstraints.HORIZONTAL;
+        add(sellButton, gb);
+
     }
 
     public void addStates(HashMap<Integer, String> states) {

@@ -224,7 +224,7 @@ public class Controller {
 
     public void showSalesPanel() {
         theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
-        theView.setSize(new Dimension(500,500));
+        theView.setSize(new Dimension(600,600));
         theView.setLocationRelativeTo(null);
         addStates();
         addSellActionListeners();
