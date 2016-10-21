@@ -3,7 +3,6 @@ package iteso.mx.UI.SalesTabs;
 import iteso.mx.TableModels.ModifySellTableModel;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Vector;

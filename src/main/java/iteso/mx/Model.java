@@ -2,13 +2,9 @@ package iteso.mx;
 
 
 import iteso.mx.emails.SendEmail;
-import org.omg.CORBA.Object;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 
 public class Model {
@@ -172,4 +168,31 @@ public class Model {
         } catch (Exception e) { e.printStackTrace();}
     }
 
+    public Vector<Vector<Object>> getAllSells(){
+        Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
+        String sellsProcedure = "execute SP_Mostrar_Total_Ventas";
+        Vector<Object> aux = new Vector<Object>();
+
+        try{
+
+            resultSet = statement.executeQuery(sellsProcedure);
+            while(!resultSet.next()){
+                String s1 = resultSet.getString(1);
+                String s2 = resultSet.getString(2);
+                String s3 = resultSet.getString(3);
+                String s4 = resultSet.getString(4);
+                String s5 = resultSet.getString(5);
+                String s6 = resultSet.getString(6);
+                String s7 = resultSet.getString(7);
+                aux = (new Vector<Object>(Arrays.asList(s1,s2,s3,s4,s5,s6,s7)));
+                rows.add(aux);
+            }
+        }catch (Exception e){
+
+        }
+
+
+        return rows;
+
+    }
 }
