@@ -5,9 +5,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+//Módulo donde comparará de manera correcta y/o negativa la información con el módulo Model
+
 public class Controller {
+
     private Model theModel;
     private View theView;
+    public static final int SOURCE_CITIES = 0;
+    public static final int DESTINATION_CITIES = 1;
 
     public Controller(final Model theModel, final View theView) {
         this.theModel = theModel;
@@ -190,18 +195,29 @@ public class Controller {
         theView.salesPanel.sellPanel.addStates(theModel.getStates());
     }
 
-    public void addCities() {
-        int selectedItem = theView.salesPanel.sellPanel.stateComboBox.getSelectedIndex();
-        int index = theView.salesPanel.sellPanel.stateIDs.get(selectedItem);
-        theView.salesPanel.sellPanel.addCities(theModel.getCities(index));
+    public void addCities(int cities) {
+        int index;
+        if(cities == SOURCE_CITIES) {
+            index = theView.salesPanel.sellPanel.srcStateIDs.get(theView.salesPanel.sellPanel.srcStateComboBox.getSelectedIndex());
+            theView.salesPanel.sellPanel.addSrcCities(theModel.getCities(index));
+        }
+        else {
+            index = theView.salesPanel.sellPanel.destStateIDs.get(theView.salesPanel.sellPanel.destStateComboBox.getSelectedIndex());
+            theView.salesPanel.sellPanel.addDestCities(theModel.getCities(index));
+        }
     }
 
     public void addSellActionListeners() {
 
-        theView.salesPanel.sellPanel.addStateComboBoxActionListener(new ActionListener() {
+        theView.salesPanel.sellPanel.addSrcStateComboBoxActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                System.out.println(theView.salesPanel.sellPanel.stateComboBox.getSelectedIndex());
-                addCities();
+                addCities(SOURCE_CITIES);
+            }
+        });
+
+        theView.salesPanel.sellPanel.addDestStateComboBoxActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addCities(DESTINATION_CITIES);
             }
         });
     }
@@ -212,5 +228,6 @@ public class Controller {
         theView.setLocationRelativeTo(null);
         addStates();
         addSellActionListeners();
+        theView.salesPanel.sellPanel.selectDefault();
     }
 }

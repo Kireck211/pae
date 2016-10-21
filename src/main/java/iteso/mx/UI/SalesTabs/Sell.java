@@ -5,18 +5,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 
 public class Sell extends JPanel {
     public JLabel clientNameLabel;
     public JTextField clientNameField;
-    public JLabel stateLabel;
-    public JComboBox<String> stateComboBox;
-    public ArrayList<Integer> stateIDs;
-    public JLabel cityLabel;
-    public JComboBox<String> cityCBox;
-    public ArrayList<Integer> cityIDs;
+    public JLabel srcStateLabel;
+    public JLabel destStateLabel;
+    public JComboBox<String> srcStateComboBox;
+    public JComboBox<String> destStateComboBox;
+    public ArrayList<Integer> srcStateIDs;
+    public ArrayList<Integer> destStateIDs;
+    public JLabel srcCityLabel;
+    public JLabel destCityLabel;
+    public JComboBox<String> srcCityCBox;
+    public JComboBox<String> destCityCBox;
+    public ArrayList<Integer> srcCityIDs;
+    public ArrayList<Integer>  destCityIDs;
+    public JLabel dateLab;
+    public JComboBox<Integer> dayCBox;
+    public JComboBox<String> monthCBox;
+    public JComboBox<Integer> yearCBox;
 
 
     public Sell() {
@@ -25,61 +36,153 @@ public class Sell extends JPanel {
 
         clientNameLabel = new JLabel("Nombre:");
         clientNameField = new JTextField(15);
-        stateLabel = new JLabel("Estado:");
-        stateComboBox = new JComboBox<String>();
-        stateIDs = new ArrayList<Integer>();
-        cityLabel = new JLabel("Ciudad:");
-        cityCBox = new JComboBox<String>();
-        cityIDs = new ArrayList<Integer>();
+        srcStateLabel = new JLabel("Estado (Origen):");
+        destStateLabel = new JLabel("Estado (Destino):");
+        srcStateComboBox = new JComboBox<String>();
+        destStateComboBox = new JComboBox<String>();
+        srcStateIDs = new ArrayList<Integer>();
+        destStateIDs = new ArrayList<Integer>();
+        srcCityLabel = new JLabel("Ciudad (Origen):");
+        destCityLabel = new JLabel("Ciudad (Destino):");
+        srcCityCBox = new JComboBox<String>();
+        destCityCBox = new JComboBox<String>();
+        srcCityIDs = new ArrayList<Integer>();
+        destCityIDs = new ArrayList<Integer>();
+        dateLab = new JLabel("Fecha:");
+        dayCBox = new JComboBox<Integer>();
+        monthCBox = new JComboBox<String>();
+        yearCBox = new JComboBox<Integer>();
+        addDates();
 
+        // Add first column
         gb.gridx = 0;
         gb.gridy = 0;
         gb.weightx = 1;
         gb.weighty = 1;
+        gb.gridwidth = 2;
         add(clientNameLabel, gb);
 
-        gb.gridx = 1;
+        gb.gridy = 1;
+        add(srcStateLabel, gb);
+
+        gb.gridy = 2;
+        add(srcCityLabel, gb);
+
+        gb.gridy = 3;
+        add(destStateLabel, gb);
+
+        gb.gridy = 4;
+        add(destCityLabel, gb);
+
+        gb.gridy = 5;
+        add(dateLab, gb);
+
+
+        // Add second column
+        gb.gridwidth = 3;
+        gb.gridx = 2;
+        gb.gridy = 0;
         add(clientNameField, gb);
 
-        gb.gridx = 0;
         gb.gridy = 1;
-        add(stateLabel, gb);
+        add(srcStateComboBox, gb);
 
-        gb.gridx = 1;
-        add(stateComboBox, gb);
-
-        gb.gridx = 0;
         gb.gridy = 2;
-        add(cityLabel, gb);
+        add(srcCityCBox, gb);
 
-        gb.gridx = 1;
-        add(cityCBox, gb);
+        gb.gridy = 3;
+        add(destStateComboBox, gb);
+
+        gb.gridy = 4;
+        add(destCityCBox, gb);
+
+
+        // Add date in second column
+        gb.gridwidth = 1;
+        gb.gridx = 3;
+        gb.gridy = 5;
+        add(dayCBox, gb);
+
+        gb.gridx = 4;
+        add(monthCBox, gb);
+
+        gb.gridx = 5;
+        add(yearCBox, gb);
     }
 
     public void addStates(HashMap<Integer, String> states) {
-        if(stateIDs != null)
-            stateIDs = new ArrayList<Integer>();
-        if(stateComboBox.getItemCount() != 0)
-            stateComboBox.removeAllItems();
+        if(srcStateIDs != null)
+            srcStateIDs = new ArrayList<Integer>();
+        if(destCityIDs != null)
+            destCityIDs = new ArrayList<Integer>();
+        if(srcStateComboBox.getItemCount() != 0)
+            srcStateComboBox.removeAllItems();
+        if(destStateComboBox.getItemCount() != 0)
+            destStateComboBox.removeAllItems();
         for(Integer key: states.keySet()) {
-            stateIDs.add(key);
-            stateComboBox.addItem(states.get(key));
+            srcStateIDs.add(key);
+            srcStateComboBox.addItem(states.get(key));
+            destStateIDs.add(key);
+            destStateComboBox.addItem(states.get(key));
         }
     }
 
-    public void addStateComboBoxActionListener(ActionListener actionListener){
-        stateComboBox.addActionListener(actionListener);
+    public void addSrcStateComboBoxActionListener(ActionListener actionListener){
+        srcStateComboBox.addActionListener(actionListener);
     }
 
-    public void addCities(HashMap<Integer, String> cities) {
-        if(cityIDs != null)
-            cityIDs = new ArrayList<Integer>();
-        if(cityCBox.getItemCount() != 0)
-            cityCBox.removeAllItems();
+    public void addSrcCities(HashMap<Integer, String> cities) {
+        if(srcCityIDs != null)
+            srcCityIDs = new ArrayList<Integer>();
+        if(srcCityCBox.getItemCount() != 0)
+            srcCityCBox.removeAllItems();
         for(Integer key: cities.keySet()) {
-            cityIDs.add(key);
-            cityCBox.addItem(cities.get(key));
-//            System.out.println(key);
+            srcCityIDs.add(key);
+            srcCityCBox.addItem(cities.get(key));
         }
+    }
+
+    public void addDestCities(HashMap<Integer, String> cities) {
+        if(destCityIDs != null)
+            destCityIDs = new ArrayList<Integer>();
+        if(destCityCBox.getItemCount() != 0)
+            destCityCBox.removeAllItems();
+        for(Integer key: cities.keySet()) {
+            destCityIDs.add(key);
+            destCityCBox.addItem(cities.get(key));
+        }
+    }
+
+    public void addDestStateComboBoxActionListener(ActionListener actionListener) {
+        destStateComboBox.addActionListener(actionListener);
+    }
+
+    public void addDates() {
+        for(int i = 1; i < 32; i++) {
+            dayCBox.addItem(new Integer(i));
+        }
+        monthCBox.addItem("Enero");
+        monthCBox.addItem("Febrero");
+        monthCBox.addItem("Marzo");
+        monthCBox.addItem("Abril");
+        monthCBox.addItem("Mayo");
+        monthCBox.addItem("Junio");
+        monthCBox.addItem("Julio");
+        monthCBox.addItem("Agosto");
+        monthCBox.addItem("Septiembre");
+        monthCBox.addItem("Octubre");
+        monthCBox.addItem("Noviembre");
+        monthCBox.addItem("Diciembre");
+        for(int i = 0; i < 2; i++) {
+            yearCBox.addItem(Calendar.getInstance().get(Calendar.YEAR) + i);
+        }
+    }
+
+    public void selectDefault() {
+        srcStateComboBox.setSelectedIndex(0);
+        destStateComboBox.setSelectedIndex(1);
+        dayCBox.setSelectedIndex(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)-1);
+        monthCBox.setSelectedIndex(Calendar.getInstance().get(Calendar.MONTH));
+        yearCBox.setSelectedIndex(0);
     }
 }
