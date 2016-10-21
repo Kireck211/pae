@@ -4,9 +4,7 @@ package iteso.mx.UI.SalesTabs;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
+import java.util.*;
 
 
 public class Sell extends JPanel {
@@ -14,6 +12,7 @@ public class Sell extends JPanel {
     public JTextField clientNameField;
     public JLabel srcStateLabel;
     public JLabel destStateLabel;
+    public JLabel commentJLabel;
     public JComboBox<String> srcStateComboBox;
     public JComboBox<String> destStateComboBox;
     public ArrayList<Integer> srcStateIDs;
@@ -24,10 +23,17 @@ public class Sell extends JPanel {
     public JComboBox<String> destCityCBox;
     public ArrayList<Integer> srcCityIDs;
     public ArrayList<Integer>  destCityIDs;
+    public JLabel numberTicketsLabel;
+    public JComboBox<Integer> numberTicketsCBox;
     public JLabel dateLab;
     public JComboBox<Integer> dayCBox;
     public JComboBox<String> monthCBox;
     public JComboBox<Integer> yearCBox;
+    public JTextArea comment;
+    public JLabel priceLabel;
+    public JLabel totalLabel;
+    public JButton sellButton;
+    public int totalPrice;
 
 
     public Sell() {
@@ -52,6 +58,14 @@ public class Sell extends JPanel {
         dayCBox = new JComboBox<Integer>();
         monthCBox = new JComboBox<String>();
         yearCBox = new JComboBox<Integer>();
+        numberTicketsLabel = new JLabel("Número de boletos");
+        numberTicketsCBox = new JComboBox<Integer>(new Vector<Integer>(Arrays.asList(1,2,3,4,5)));
+        commentJLabel = new JLabel("Comentarios:");
+        comment = new JTextArea(10, 30);
+        priceLabel = new JLabel("Precio:");
+        totalLabel = new JLabel("$ 0.00");
+        sellButton = new JButton("Realizar venta");
+        totalPrice = 0;
         addDates();
 
         // Add first column
@@ -77,6 +91,15 @@ public class Sell extends JPanel {
         gb.gridy = 5;
         add(dateLab, gb);
 
+        gb.gridy = 6;
+        add(numberTicketsLabel, gb);
+
+        gb.gridy = 7;
+        add(priceLabel, gb);
+
+        gb.gridy = 8;
+        add(commentJLabel, gb);
+
 
         // Add second column
         gb.gridwidth = 3;
@@ -96,6 +119,15 @@ public class Sell extends JPanel {
         gb.gridy = 4;
         add(destCityCBox, gb);
 
+        gb.gridy = 6;
+        add(numberTicketsCBox, gb);
+
+        gb.gridy = 7;
+        add(totalLabel, gb);
+
+        gb.gridy = 8;
+        add(comment, gb);
+
 
         // Add date in second column
         gb.gridwidth = 1;
@@ -108,6 +140,14 @@ public class Sell extends JPanel {
 
         gb.gridx = 5;
         add(yearCBox, gb);
+
+        // Add sell button
+        gb.gridx = 1;
+        gb.gridy = 9;
+        gb.gridwidth = 5;
+        gb.fill = GridBagConstraints.HORIZONTAL;
+        add(sellButton, gb);
+
     }
 
     public void addStates(HashMap<Integer, String> states) {
@@ -181,8 +221,17 @@ public class Sell extends JPanel {
     public void selectDefault() {
         srcStateComboBox.setSelectedIndex(0);
         destStateComboBox.setSelectedIndex(1);
+        numberTicketsCBox.setSelectedIndex(0);
         dayCBox.setSelectedIndex(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)-1);
         monthCBox.setSelectedIndex(Calendar.getInstance().get(Calendar.MONTH));
         yearCBox.setSelectedIndex(0);
+    }
+
+    public void addSellButtonActionListener(ActionListener actionListener) {
+        sellButton.addActionListener(actionListener);
+    }
+
+    public void addNumberTicketsActionListener(ActionListener actionListener) {
+        numberTicketsCBox.addActionListener(actionListener);
     }
 }

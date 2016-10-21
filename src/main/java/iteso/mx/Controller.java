@@ -4,6 +4,9 @@ package iteso.mx;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Vector;
 
 //Módulo donde comparará de manera correcta y/o negativa la información con el módulo Model
 
@@ -88,6 +91,8 @@ public class Controller {
                 String userName = theView.singInPanel.getUserJTextField();
                 String password = theView.singInPanel.getPasswordJTextField();
                 if(isUserPasswordCorrect(userName, password)){
+                    int idEmployee = theModel.getIDEmployeeDB(userName);
+                    theModel.setIDEmployee(idEmployee);
                     showSalesPanel();
                 }
             }
@@ -131,6 +136,8 @@ public class Controller {
                     String user = theView.singInPanel.getUserJTextField();
                     String password = theView.singInPanel.getPasswordJTextField();
                     if (isUserPasswordCorrect(user, password)) {
+                        int idEmployee = theModel.getIDEmployeeDB(user);
+                        theModel.setIDEmployee(idEmployee);
                         showSalesPanel();
                     }
                 }
@@ -220,11 +227,37 @@ public class Controller {
                 addCities(DESTINATION_CITIES);
             }
         });
+
+        theView.salesPanel.sellPanel.addSellButtonActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Integer selectedDay = (Integer) theView.salesPanel.sellPanel.dayCBox.getSelectedItem();
+                Integer selectedMonth = new Integer(theView.salesPanel.sellPanel.monthCBox.getSelectedIndex());
+                Integer selectedYear = (Integer) theView.salesPanel.sellPanel.yearCBox.getSelectedItem();
+                int numberTickets = theView.salesPanel.sellPanel.numberTicketsCBox.getSelectedIndex() + 1;
+                String srcCity = (String) theView.salesPanel.sellPanel.srcCityCBox.getSelectedItem();
+                String destCity = (String) theView.salesPanel.sellPanel.destCityCBox.getSelectedItem();
+                int route = theModel.getRouteID(srcCity, destCity);
+                int idEmployee = theModel.idEmployee;
+                Random r = new Random();
+                int idClient = 2;/*r.nextInt(5-1) +1;*/
+                String comments = theView.salesPanel.sellPanel.comment.getText();
+                String date = selectedYear.toString() + "-" + selectedMonth.toString() + "-" + selectedDay.toString();
+                theModel.registerSell(date, numberTickets, route, idEmployee, idClient, comments);
+            }
+        });
+
+        theView.salesPanel.sellPanel.addNumberTicketsActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int total = theView.salesPanel.sellPanel.numberTicketsCBox.getSelectedIndex() + 1;
+                theView.salesPanel.sellPanel.totalLabel.setText("$ " + (new Integer(100 * total)).toString() + ".00");
+                theView.salesPanel.sellPanel.totalPrice = 100 * total;
+            }
+        });
     }
 
     public void showSalesPanel() {
         theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
-        theView.setSize(new Dimension(500,500));
+        theView.setSize(new Dimension(600,600));
         theView.setLocationRelativeTo(null);
         addStates();
         addSellActionListeners();

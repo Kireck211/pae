@@ -4,9 +4,6 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Arrays;
 import java.util.Vector;
 
-/**
- * Created by Aldo on 20/10/2016.
- */
 public class ModifySellTableModel extends AbstractTableModel {
 
     String[] names = {"Folio",
