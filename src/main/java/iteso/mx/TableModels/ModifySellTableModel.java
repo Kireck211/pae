@@ -9,13 +9,14 @@ public class ModifySellTableModel extends AbstractTableModel {
     String[] names = {"Folio",
                       "Fecha",
                       "Empleado",
-                      "Cliente",
                       "PrecioBoleto",
                       "Cantidad",
                       "Subtotal",
                       "Total",
-                      "Origen",
-                      "Destino"};
+                        "Origen",
+                        "Destino",
+                        "Observaciones",
+                        "Cliente"};
 
     Vector<String>  columnNames;
     Vector<Vector<Object>> data;
@@ -60,7 +61,7 @@ public class ModifySellTableModel extends AbstractTableModel {
     }
 
     public void setData(Vector<Vector<Object>> data) {
-        this.data = data;
-        fireTableDataChanged();
+         this.data = data;
+         fireTableDataChanged();
     }
 }

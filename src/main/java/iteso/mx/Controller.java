@@ -94,6 +94,7 @@ public class Controller {
                     int idEmployee = theModel.getIDEmployeeDB(userName);
                     theModel.setIDEmployee(idEmployee);
                     showSalesPanel();
+
                 }
             }
         });
@@ -243,6 +244,7 @@ public class Controller {
                 String comments = theView.salesPanel.sellPanel.comment.getText();
                 String date = selectedYear.toString() + "-" + selectedMonth.toString() + "-" + selectedDay.toString();
                 theModel.registerSell(date, numberTickets, route, idEmployee, idClient, comments);
+                setModifySellTable();
             }
         });
 
@@ -262,9 +264,10 @@ public class Controller {
         addStates();
         addSellActionListeners();
         theView.salesPanel.sellPanel.selectDefault();
+        setModifySellTable();
     }
 
-    public void setModifySellTable(){
-        theView.salesPanel.modifySellPanel.setData(theModel.getAllSells());
+    public void setModifySellTable(){theView.salesPanel.modifySellPanel.setData(theModel.getAllSells());
     }
+
 }

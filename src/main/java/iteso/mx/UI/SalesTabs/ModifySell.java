@@ -16,9 +16,12 @@ public class ModifySell extends JPanel{
 
    public ModifySell(){
        super(new GridLayout(2,0));
-
+       tableModel = new ModifySellTableModel();
        table = new JTable(tableModel);
-
+       table.removeColumn(table.getColumnModel().getColumn(10));
+       table.removeColumn(table.getColumnModel().getColumn(9));
+       table.removeColumn(table.getColumnModel().getColumn(8));
+       table.removeColumn(table.getColumnModel().getColumn(7));
        scrollPane = new JScrollPane(table);
 
        table.setFillsViewportHeight(true);
