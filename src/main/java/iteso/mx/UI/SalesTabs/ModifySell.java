@@ -1,5 +1,6 @@
 package iteso.mx.UI.SalesTabs;
 
+import iteso.mx.Model;
 import iteso.mx.TableModels.ModifySellTableModel;
 
 import javax.swing.*;
@@ -9,21 +10,14 @@ import java.util.Vector;
 
 
 public class ModifySell extends JPanel{
-    ModifySellTableModel model;
+    ModifySellTableModel tableModel;
     JTable table;
     JScrollPane scrollPane;
+
    public ModifySell(){
        super(new GridLayout(2,0));
 
-       model = new ModifySellTableModel();
-
-       Vector<Object> v = new Vector<Object>(Arrays.asList((Object)"1", (Object)"04-09-2015",(Object)"Aldo",(Object)"Juan",(Object)"000",
-       (Object)"123", (Object)"789"));
-
-        model.addRow(v);
-
-
-       table = new JTable(model);
+       table = new JTable(tableModel);
 
        scrollPane = new JScrollPane(table);
 
@@ -36,8 +30,9 @@ public class ModifySell extends JPanel{
 
    }
 
-
-
+    public void setData(Vector<Vector<Object>> data){
+        tableModel.setData(data);
+    }
 
 
 

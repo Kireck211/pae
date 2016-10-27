@@ -10,20 +10,25 @@ public class ModifySellTableModel extends AbstractTableModel {
                       "Fecha",
                       "Empleado",
                       "Cliente",
+                      "PrecioBoleto",
+                      "Cantidad",
                       "Subtotal",
-                      "IVA",
-                      "Total"};
+                      "Total",
+                      "Origen",
+                      "Destino"};
 
     Vector<String>  columnNames;
     Vector<Vector<Object>> data;
+
+    public ModifySellTableModel(Vector<Vector<Object>> v){
+        columnNames = (new Vector<String>(Arrays.asList(names)));
+        data = v;
+    }
 
     public ModifySellTableModel(){
         columnNames = (new Vector<String>(Arrays.asList(names)));
         data = new Vector<Vector<Object>>();
     }
-
-
-
 
     @Override
     public int getRowCount() {
@@ -54,5 +59,8 @@ public class ModifySellTableModel extends AbstractTableModel {
         return columnNames.elementAt(column);
     }
 
-
+    public void setData(Vector<Vector<Object>> data) {
+        this.data = data;
+        fireTableDataChanged();
+    }
 }

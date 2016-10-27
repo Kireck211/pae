@@ -263,4 +263,8 @@ public class Controller {
         addSellActionListeners();
         theView.salesPanel.sellPanel.selectDefault();
     }
+
+    public void setModifySellTable(){
+        theView.salesPanel.modifySellPanel.setData(theModel.getAllSells());
+    }
 }

@@ -176,7 +176,7 @@ public class Model {
         try{
 
             resultSet = statement.executeQuery(sellsProcedure);
-            while(!resultSet.next()){
+            while(resultSet.next()){
                 String s1 = resultSet.getString(1);
                 String s2 = resultSet.getString(2);
                 String s3 = resultSet.getString(3);
@@ -184,7 +184,10 @@ public class Model {
                 String s5 = resultSet.getString(5);
                 String s6 = resultSet.getString(6);
                 String s7 = resultSet.getString(7);
-                aux = (new Vector<Object>(Arrays.asList(s1,s2,s3,s4,s5,s6,s7)));
+                String s8 = resultSet.getString(8);
+                String s9 = resultSet.getString(9);
+                String s10= resultSet.getString(10);
+                aux = (new Vector<Object>(Arrays.asList(s1,s2,s3,s4,s5,s6,s7,s8,s9,s10)));
                 rows.add(aux);
             }
         }catch (Exception e){
