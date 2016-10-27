@@ -230,6 +230,8 @@ public class Controller {
 
         theView.salesPanel.sellPanel.addSellButtonActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                String name = theView.salesPanel.sellPanel.clientNameField.getText();
+                int idClient = theModel.insertClient(name);
                 Integer selectedDay = (Integer) theView.salesPanel.sellPanel.dayCBox.getSelectedItem();
                 Integer selectedMonth = new Integer(theView.salesPanel.sellPanel.monthCBox.getSelectedIndex());
                 Integer selectedYear = (Integer) theView.salesPanel.sellPanel.yearCBox.getSelectedItem();
@@ -238,8 +240,6 @@ public class Controller {
                 String destCity = (String) theView.salesPanel.sellPanel.destCityCBox.getSelectedItem();
                 int route = theModel.getRouteID(srcCity, destCity);
                 int idEmployee = theModel.idEmployee;
-                Random r = new Random();
-                int idClient = 2;/*r.nextInt(5-1) +1;*/
                 String comments = theView.salesPanel.sellPanel.comment.getText();
                 String date = selectedYear.toString() + "-" + selectedMonth.toString() + "-" + selectedDay.toString();
                 theModel.registerSell(date, numberTickets, route, idEmployee, idClient, comments);

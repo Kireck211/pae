@@ -198,4 +198,17 @@ public class Model {
         return rows;
 
     }
+
+    public int insertClient(String name) {
+        String insertClitent = "execute " +name;
+        try {
+            resultSet = statement.executeQuery(insertClitent);
+            while(resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }
