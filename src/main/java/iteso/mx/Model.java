@@ -201,7 +201,7 @@ public class Model {
     }
 
     public int insertClient(String name) {
-        String insertClitent = "execute " +name;
+        String insertClitent = "execute Insertar_Cliente '"+name+"'";
         try {
             resultSet = statement.executeQuery(insertClitent);
             while(resultSet.next()) {
@@ -211,5 +211,14 @@ public class Model {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public void deleteSell(int idSell) {
+        String deleteSell = "execute Devolucion_Cliente '"+idSell+"'";
+        try {
+            statement.execute(deleteSell);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
