@@ -13,6 +13,7 @@ public class ModifySell extends JPanel{
     ModifySellTableModel tableModel;
     JTable table;
     JScrollPane scrollPane;
+    JPanel panel2;
 
    public ModifySell(){
        super(new GridLayout(2,0));
@@ -27,7 +28,7 @@ public class ModifySell extends JPanel{
        table.setFillsViewportHeight(true);
 
        add(scrollPane);
-       JPanel panel2 = new ModifySellDetails();
+       panel2 = new ModifySellDetails();
        panel2.setSize(new Dimension(getWidth(),200));
        add(panel2);
 

@@ -82,6 +82,21 @@ public class ModifySellDetails extends JPanel {
         gb.gridy = 3;
         add(commentField,gb);
 
+        gb.gridx = 2;
+        gb.gridy = 1;
+        add(destStateLabel,gb);
+
+        gb.gridy = 2;
+        add(destCityLabel,gb);
+
+        gb.gridx = 3;
+        gb.gridy = 1;
+        add(destStateComboBox,gb);
+
+        gb.gridy = 2;
+        add(destCityCBox,gb);
+
+
 
 
 
