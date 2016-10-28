@@ -27,7 +27,7 @@ public class ModifySell extends JPanel{
        table.setFillsViewportHeight(true);
 
        add(scrollPane);
-       JPanel panel2 = new JPanel();
+       JPanel panel2 = new ModifySellDetails();
        panel2.setSize(new Dimension(getWidth(),200));
        add(panel2);
 
