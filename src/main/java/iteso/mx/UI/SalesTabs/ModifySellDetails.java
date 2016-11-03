@@ -97,10 +97,5 @@ public class ModifySellDetails extends JPanel {
         add(destCityCBox,gb);
 
 
-
-
-
-
-
     }
 }
