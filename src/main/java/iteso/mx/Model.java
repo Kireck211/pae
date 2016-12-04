@@ -1,6 +1,7 @@
 package iteso.mx;
 
 
+import iteso.mx.Models.Client;
 import iteso.mx.emails.SendEmail;
 
 import java.sql.*;
@@ -200,17 +201,10 @@ public class Model {
 
     }
 
-    public int insertClient(String name) {
-        String insertClitent = "execute Insertar_Cliente '"+name+"'";
-        try {
-            resultSet = statement.executeQuery(insertClitent);
-            while(resultSet.next()) {
-                return resultSet.getInt(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
+    public Client getClient(String name) {
+        Client client = new Client();
+        client.setClient(name);
+        return client;
     }
 
     public void deleteSell(int idSell) {

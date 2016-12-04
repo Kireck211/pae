@@ -1,6 +1,8 @@
 package iteso.mx;
 
 
+import iteso.mx.Models.Client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -27,6 +29,7 @@ public class Controller {
         addWelcomeActionListeners();
         addSignInActionListeners();
         addRegistrationActionListeners();
+        addGlobalActionListeners();
         theView.addWindowListener(new WindowListener() {
             public void windowOpened(WindowEvent e) {
 
@@ -54,6 +57,16 @@ public class Controller {
 
             public void windowDeactivated(WindowEvent e) {
 
+            }
+        });
+    }
+
+    public void addGlobalActionListeners() {
+        theView.salesPanel.header.cerrarSesion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                theView.windowPicker.show(theView.windowsPanel, theView.SING_IN_PANEL);
+                theView.setSize(400,400);
+                theView.setLocationRelativeTo(null);
             }
         });
     }
@@ -94,7 +107,6 @@ public class Controller {
                     int idEmployee = theModel.getIDEmployeeDB(userName);
                     theModel.setIDEmployee(idEmployee);
                     showSalesPanel();
-
                 }
             }
         });
@@ -232,19 +244,25 @@ public class Controller {
         theView.salesPanel.sellPanel.addSellButtonActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = theView.salesPanel.sellPanel.clientNameField.getText();
-                int idClient = theModel.insertClient(name);
-                Integer selectedDay = (Integer) theView.salesPanel.sellPanel.dayCBox.getSelectedItem();
-                Integer selectedMonth = new Integer(theView.salesPanel.sellPanel.monthCBox.getSelectedIndex());
-                Integer selectedYear = (Integer) theView.salesPanel.sellPanel.yearCBox.getSelectedItem();
-                int numberTickets = theView.salesPanel.sellPanel.numberTicketsCBox.getSelectedIndex() + 1;
-                String srcCity = (String) theView.salesPanel.sellPanel.srcCityCBox.getSelectedItem();
-                String destCity = (String) theView.salesPanel.sellPanel.destCityCBox.getSelectedItem();
-                int route = theModel.getRouteID(srcCity, destCity);
-                int idEmployee = theModel.idEmployee;
-                String comments = theView.salesPanel.sellPanel.comment.getText();
-                String date = selectedYear.toString() + "-" + selectedMonth.toString() + "-" + selectedDay.toString();
-                theModel.registerSell(date, numberTickets, route, idEmployee, idClient, comments);
-                setModifySellTable();
+                Client client = theModel.getClient(name);
+                if (client.Nombre == null) {
+                    JOptionPane.showMessageDialog(null, "Este cliente no se encuentra registrado", "Cliente no registrado", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int idClient = client.IDCliente;
+                    Integer selectedDay = (Integer) theView.salesPanel.sellPanel.dayCBox.getSelectedItem();
+                    Integer selectedMonth = new Integer(theView.salesPanel.sellPanel.monthCBox.getSelectedIndex());
+                    Integer selectedYear = (Integer) theView.salesPanel.sellPanel.yearCBox.getSelectedItem();
+                    int numberTickets = theView.salesPanel.sellPanel.numberTicketsCBox.getSelectedIndex() + 1;
+                    String srcCity = (String) theView.salesPanel.sellPanel.srcCityCBox.getSelectedItem();
+                    String destCity = (String) theView.salesPanel.sellPanel.destCityCBox.getSelectedItem();
+                    int route = theModel.getRouteID(srcCity, destCity);
+                    int idEmployee = theModel.idEmployee;
+                    String comments = theView.salesPanel.sellPanel.comment.getText();
+                    String date = selectedYear.toString() + "-" + selectedMonth.toString() + "-" + selectedDay.toString();
+                    theModel.registerSell(date, numberTickets, route, idEmployee, idClient, comments);
+                    setModifySellTable();
+                }
             }
         });
 
@@ -258,6 +276,7 @@ public class Controller {
     }
 
     public void showSalesPanel() {
+        theView.singInPanel.eraseData();
         theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
         theView.setSize(new Dimension(600,600));
         theView.setLocationRelativeTo(null);
@@ -269,5 +288,4 @@ public class Controller {
 
     public void setModifySellTable(){theView.salesPanel.modifySellPanel.setData(theModel.getAllSells());
     }
-
 }
