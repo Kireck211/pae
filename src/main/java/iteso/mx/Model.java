@@ -2,7 +2,6 @@ package iteso.mx;
 
 
 import iteso.mx.Models.Client;
-import iteso.mx.emails.SendEmail;
 
 import java.sql.*;
 import java.util.*;
@@ -14,14 +13,12 @@ public class Model {
     private static final String DEFAULT_URL = "jdbc:sqlserver://localhost:1433;databaseName=AUTOBUS";
     private static final String DEFAULT_USERNAME = "test";
     private static final String DEFAULT_PASSWORD = "123456";
-    public SendEmail sendEmail;
     public Connection connection;
     public Statement statement;
     public ResultSet resultSet;
     public int idEmployee;
 
     public Model() {
-        sendEmail = new SendEmail();
         connection = null;
         statement = null;
         resultSet = null;
