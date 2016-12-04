@@ -109,7 +109,6 @@ public class Controller {
 
         theView.singInPanel.addForgottenPasswordListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                theModel.sendEmail.sendMessage();
             }
         });
 
