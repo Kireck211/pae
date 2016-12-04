@@ -2,15 +2,11 @@ package iteso.mx;
 
 
 import iteso.mx.Models.Client;
+import iteso.mx.UI.ClientCreationPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Vector;
-
-//Módulo donde comparará de manera correcta y/o negativa la información con el módulo Model
 
 public class Controller {
 
@@ -83,7 +79,7 @@ public class Controller {
         theView.welcomePanel.addSignUpListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 theView.windowPicker.show(theView.windowsPanel, theView.REGISTRATION_PANEL);
-                theView.setSize(new Dimension(300,300));
+                theView.setSize(new Dimension(400,400));
                 theView.setLocationRelativeTo(null);
             }
         });
@@ -162,18 +158,19 @@ public class Controller {
         theView.registrationPanel.addOkListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 theView.registrationPanel.eraseData();
-                String userName = theView.registrationPanel.getUserTextField();
+                String user = theView.registrationPanel.getUserTextField();
                 String password = theView.registrationPanel.getPasswordTextField();
-                if(isUserNameAccepted(userName)) {
-                    if(isPasswordSecure(password)) {
+                String name = theView.registrationPanel.getNameTF();
+                String apP = theView.registrationPanel.getApTF();
+                String apM = theView.registrationPanel.getAmTF();
+                String gender = theView.registrationPanel.getGenderTF().substring(0,1);
+                if(validateNewEmployee()) {
 
-                    }
-                    else {
-
-                    }
                 } else {
 
                 }
+                theModel.insertClient(user, password, name, apP, apM, gender);
+
 
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
@@ -191,14 +188,6 @@ public class Controller {
                 theView.setLocationRelativeTo(null);
             }
         });
-    }
-
-    public boolean isUserNameAccepted(String userName) {
-        return true;
-    }
-
-    public boolean isPasswordSecure(String password) {
-        return true;
     }
 
     public boolean isUserPasswordCorrect(String user, String password) {
@@ -246,6 +235,13 @@ public class Controller {
                 String name = theView.salesPanel.sellPanel.clientNameField.getText();
                 Client client = theModel.getClient(name);
                 if (client.Nombre == null) {
+                    JFrame crearClienteJF = new JFrame("Agregar Cliente");
+                    JPanel crearClienteP = new ClientCreationPanel();
+                    crearClienteJF.add(crearClienteP);
+                    crearClienteJF.setSize(300, 400);
+                    crearClienteJF.setLocationRelativeTo(null);
+                    crearClienteJF.setEnabled(true);
+                    crearClienteJF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                     JOptionPane.showMessageDialog(null, "Este cliente no se encuentra registrado", "Cliente no registrado", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
@@ -287,5 +283,9 @@ public class Controller {
     }
 
     public void setModifySellTable(){theView.salesPanel.modifySellPanel.setData(theModel.getAllSells());
+    }
+
+    public boolean validateNewEmployee() {
+        return true;
     }
 }

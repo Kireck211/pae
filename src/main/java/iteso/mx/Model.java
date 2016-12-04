@@ -207,6 +207,11 @@ public class Model {
         return client;
     }
 
+    public void insertClient(String user, String password, String name, String apP, String apM, String gender) {
+        Client client = new Client();
+        client.createClient(user, password, name, apP, apM, gender);
+    }
+
     public void deleteSell(int idSell) {
         String deleteSell = "execute Devolucion_Cliente '"+idSell+"'";
         try {

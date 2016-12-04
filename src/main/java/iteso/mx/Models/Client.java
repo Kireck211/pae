@@ -16,6 +16,23 @@ public class Client extends Model{
     public String Genero;
     public String RFC;
     private String getClientQuery = "Execute Datos_Cliente ";
+    private String createClientQuery = "INSERT INTO EMPLEADO\n" +
+                                        "VALUES(";
+
+    public void createClient(String user, String password, String name, String apP, String apM, String gender) {
+        createClientQuery += ("'" + user + "',");
+        createClientQuery += ("'" + password + "',");
+        createClientQuery += ("'" + name + "',");
+        createClientQuery += ("'" + apP + "',");
+        createClientQuery += ("'" + apM + "',");
+        createClientQuery += ("'" + gender + "')");
+
+        try {
+            resultSet = statement.executeQuery(createClientQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void setClient (String nombre) {
         getClientQuery += ("'" + nombre + "'");
