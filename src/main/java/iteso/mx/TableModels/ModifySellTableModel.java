@@ -64,4 +64,17 @@ public class ModifySellTableModel extends AbstractTableModel {
          this.data = data;
          fireTableDataChanged();
     }
+
+    public void deleteRow(int index)
+    {
+        data.remove(index);
+
+        fireTableRowsDeleted(index,index);
+    }
+
+    public Vector<Object> getData(int index){
+
+        return data.elementAt(index);
+    }
+
 }

@@ -8,8 +8,11 @@ import iteso.mx.Validators.ClientValidator;
 import iteso.mx.Validators.EmployeeValidator;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
 
 public class Controller {
 
@@ -29,6 +32,7 @@ public class Controller {
         addSignInActionListeners();
         addRegistrationActionListeners();
         addGlobalActionListeners();
+        addModifySellListeners();
         theView.addWindowListener(new WindowListener() {
             public void windowOpened(WindowEvent e) {
 
@@ -64,7 +68,7 @@ public class Controller {
         theView.salesPanel.header.cerrarSesion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 theView.windowPicker.show(theView.windowsPanel, theView.SING_IN_PANEL);
-                theView.setSize(400,400);
+                theView.setSize(400, 400);
                 theView.setLocationRelativeTo(null);
             }
         });
@@ -74,7 +78,7 @@ public class Controller {
         theView.welcomePanel.addSignInListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 theView.windowPicker.show(theView.windowsPanel, theView.SING_IN_PANEL);
-                theView.setSize(new Dimension(400,400));
+                theView.setSize(new Dimension(400, 400));
                 theView.setLocationRelativeTo(null);
             }
         });
@@ -82,7 +86,7 @@ public class Controller {
         theView.welcomePanel.addSignUpListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 theView.windowPicker.show(theView.windowsPanel, theView.REGISTRATION_PANEL);
-                theView.setSize(new Dimension(400,400));
+                theView.setSize(new Dimension(400, 400));
                 theView.setLocationRelativeTo(null);
             }
         });
@@ -102,7 +106,7 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 String userName = theView.singInPanel.getUserJTextField();
                 String password = theView.singInPanel.getPasswordJTextField();
-                if(isUserPasswordCorrect(userName, password)){
+                if (isUserPasswordCorrect(userName, password)) {
                     int idEmployee = theModel.getIDEmployeeDB(userName);
                     theModel.setIDEmployee(idEmployee);
                     showSalesPanel();
@@ -164,15 +168,15 @@ public class Controller {
                 String name = theView.registrationPanel.getNameTF();
                 String apP = theView.registrationPanel.getApTF();
                 String apM = theView.registrationPanel.getAmTF();
-                String gender = theView.registrationPanel.getGenderTF().substring(0,1);
+                String gender = theView.registrationPanel.getGenderTF().substring(0, 1);
                 theView.registrationPanel.eraseData();
                 Employee employee = new Employee(user, password, name, apP, apM, gender);
                 EmployeeValidator employeeValidator = new EmployeeValidator();
-                if(employeeValidator.isValidEmployee(employee)) {
+                if (employeeValidator.isValidEmployee(employee)) {
                     theModel.insertEmployee(employee);
                     theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
                     theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
-                    theView.setSize(new Dimension(500,500));
+                    theView.setSize(new Dimension(500, 500));
                     theView.setLocationRelativeTo(null);
                 }
             }
@@ -183,7 +187,7 @@ public class Controller {
                 theView.registrationPanel.eraseData();
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
                 theView.windowPicker.show(theView.windowsPanel, theView.WELCOME_PANEL);
-                theView.setSize(new Dimension(500,500));
+                theView.setSize(new Dimension(500, 500));
                 theView.setLocationRelativeTo(null);
             }
         });
@@ -207,11 +211,10 @@ public class Controller {
         int index;
         if (theView.salesPanel.sellPanel.destCityCBox.getItemCount() == 0)
             return;
-        if(cities == SOURCE_CITIES) {
+        if (cities == SOURCE_CITIES) {
             index = theView.salesPanel.sellPanel.srcStateIDs.get(theView.salesPanel.sellPanel.srcStateComboBox.getSelectedIndex());
             theView.salesPanel.sellPanel.addSrcCities(theModel.getCities(index));
-        }
-        else {
+        } else {
             index = theView.salesPanel.sellPanel.destStateIDs.get(theView.salesPanel.sellPanel.destStateComboBox.getSelectedIndex());
             theView.salesPanel.sellPanel.addDestCities(theModel.getCities(index));
         }
@@ -257,10 +260,8 @@ public class Controller {
                     crearClienteJF.setLocationRelativeTo(null);
                     crearClienteJF.setEnabled(true);
                     crearClienteJF.setVisible(true);
-                    theView.setVisible(false);
                     JOptionPane.showMessageDialog(null, "Este cliente no se encuentra registrado", "Cliente no registrado", JOptionPane.ERROR_MESSAGE);
-                }
-                else {
+                } else {
                     int idClient = client.IDCliente;
                     Integer selectedDay = (Integer) theView.salesPanel.sellPanel.dayCBox.getSelectedItem();
                     Integer selectedMonth = new Integer(theView.salesPanel.sellPanel.monthCBox.getSelectedIndex());
@@ -292,7 +293,7 @@ public class Controller {
     public void showSalesPanel() {
         theView.singInPanel.eraseData();
         theView.windowPicker.show(theView.windowsPanel, theView.SALES_PANEL);
-        theView.setSize(new Dimension(600,600));
+        theView.setSize(new Dimension(600, 600));
         theView.setLocationRelativeTo(null);
         addStates();
         addSellActionListeners();
@@ -300,7 +301,31 @@ public class Controller {
         setModifySellTable();
     }
 
-    public void setModifySellTable(){theView.salesPanel.modifySellPanel.setData(theModel.getAllSells());
+    public void setModifySellTable() {
+        theView.salesPanel.modifySellPanel.setData(theModel.getAllSells());
     }
 
+    public void addModifySellListeners() {
+        theView.salesPanel.modifySellPanel.addDeleteButtonListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                int row = theView.salesPanel.modifySellPanel.getTable().getSelectedRow();
+                int index = Integer.parseInt((String) theView.salesPanel.modifySellPanel.getData(row).elementAt(0));
+
+                theModel.deleteSell(index);
+                theView.salesPanel.modifySellPanel.deleteRow();
+
+            }
+        });
+
+        /*theView.salesPanel.modifySellPanel.addRowSelectedListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                int row = theView.salesPanel.modifySellPanel.getTable().getSelectedRow();
+                Vector<Object> data = theView.salesPanel.modifySellPanel.getData(row); //Necesita ser casteado para cada objeto
+
+            }
+        });*/
+
+
+    }
 }

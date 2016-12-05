@@ -33,7 +33,8 @@ public class ModifySellDetails extends JPanel {
     ArrayList<Integer> srcCityIDs;
     ArrayList<Integer> destCityIDs;
 
-
+    JButton deleteButton;
+    JButton modifyButton;
 
     public ModifySellDetails(){
         setLayout(new GridBagLayout());
@@ -55,6 +56,8 @@ public class ModifySellDetails extends JPanel {
         destCityIDs = new ArrayList<Integer>();
         commentField = new JTextArea(10, 30);
         commentLabel = new JLabel("Comentarios:");
+        deleteButton = new JButton("Borrar Venta");
+        modifyButton = new JButton("Modicar Venta");
 
         gb.gridx = 0;
         gb.gridy = 0;
@@ -96,6 +99,18 @@ public class ModifySellDetails extends JPanel {
         gb.gridy = 2;
         add(destCityCBox,gb);
 
+        gb.gridy = 3;
+        add(deleteButton);
 
+        gb.gridy = 4;
+        add(modifyButton);
+    }
+
+    public JButton getDeleteButton(){
+        return this.deleteButton;
+    }
+
+    public JButton getModifyButton(){
+        return this.modifyButton;
     }
 }

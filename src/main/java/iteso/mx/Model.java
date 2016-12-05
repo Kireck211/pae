@@ -220,7 +220,7 @@ public class Model {
     }
 
     public void deleteSell(int idSell) {
-        String deleteSell = "execute Devolucion_Cliente '"+idSell+"'";
+        String deleteSell = "execute Borrar_Venta '"+idSell+"'";
         try {
             statement.execute(deleteSell);
         } catch (Exception e) {
