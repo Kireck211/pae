@@ -306,13 +306,14 @@ public class Controller {
             }
         });
 
-        /*theView.salesPanel.modifySellPanel.addRowSelectedListener(new ListSelectionListener() {
+        theView.salesPanel.modifySellPanel.addRowSelectedListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
-                int row = theView.salesPanel.modifySellPanel.getTable().getSelectedRow();
-                Vector<Object> data = theView.salesPanel.modifySellPanel.getData(row); //Necesita ser casteado para cada objeto
-
+                if(!theView.salesPanel.modifySellPanel.getTable().getSelectionModel().isSelectionEmpty() ) {
+                    int row = theView.salesPanel.modifySellPanel.getTable().getSelectedRow();
+                    Vector<Object> data = theView.salesPanel.modifySellPanel.getData(row); //Necesita ser casteado para cada objeto
+                }
             }
-        });*/
+        });
 
 
 
