@@ -65,6 +65,10 @@ public class ModifySell extends JPanel{
         panel2.deleteButton.addActionListener(e);
     }
 
+    public void addModifyButton(ActionListener e) {
+        panel2.modifyButton.addActionListener(e);
+    }
+
     public Vector<Object> getData(int index){
        return tableModel.getData(index);
     }

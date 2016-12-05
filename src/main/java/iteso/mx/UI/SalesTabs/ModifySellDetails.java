@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class ModifySellDetails extends JPanel {
 
-    JLabel clientNameLabel;
-    public JTextField clientNameField;
+    //JLabel clientNameLabel;
+    //public JTextField clientNameField;
 
     //JComboBox<String> srcStateComboBox;
     //JComboBox<String> destStateComboBox;
@@ -40,8 +40,8 @@ public class ModifySellDetails extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gb = new GridBagConstraints();
 
-        clientNameLabel = new JLabel("Nombre:");
-        clientNameField = new JTextField(15);
+        //clientNameLabel = new JLabel("Nombre:");
+        //clientNameField = new JTextField(15);
         //srcStateLabel = new JLabel("Estado (Origen):");
         //destStateLabel = new JLabel("Estado (Destino):");
         //srcStateComboBox = new JComboBox<String>();
@@ -60,10 +60,10 @@ public class ModifySellDetails extends JPanel {
         modifyButton = new JButton("Modicar Venta");
 
         // Add labels
-        gb.gridx = 0;
-        gb.gridy = 0;
-        gb.insets = new Insets(0, 0, 20, 0);
-        add(clientNameLabel, gb);
+        //gb.gridx = 0;
+        //gb.gridy = 0;
+        //gb.insets = new Insets(0, 0, 20, 0);
+        //add(clientNameLabel, gb);
 
         /*gb.gridy++;
         add(srcStateLabel, gb);
@@ -84,11 +84,11 @@ public class ModifySellDetails extends JPanel {
 
         // Add text fields
 
-        gb.gridx = 1;
-        gb.gridy = 0;
-        gb.gridwidth = 3;
-        gb.fill = GridBagConstraints.HORIZONTAL;
-        add(clientNameField, gb);
+        //gb.gridx = 1;
+        //gb.gridy = 0;
+        //gb.gridwidth = 3;
+        //gb.fill = GridBagConstraints.HORIZONTAL;
+        //add(clientNameField, gb);
 
         /*gb.gridy++;
         gb.gridwidth = 1;

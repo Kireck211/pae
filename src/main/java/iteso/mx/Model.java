@@ -4,6 +4,7 @@ package iteso.mx;
 import iteso.mx.Models.Client;
 import iteso.mx.Models.Employee;
 
+import java.lang.ref.SoftReference;
 import java.sql.*;
 import java.util.*;
 
@@ -19,6 +20,8 @@ public class Model {
     public ResultSet resultSet;
     public int idEmployee;
     public String nameEmployee;
+    public String comment;
+    public int folio;
 
     public Model() {
         connection = null;
@@ -259,5 +262,22 @@ public class Model {
 
     public String getNameEmployee() {
         return this.nameEmployee;
+    }
+
+    public void modifySell(int folio, String comment) {
+        String query1 = "EXECUTE update_comment '" + comment + "'," + folio + ";";
+        try {
+            resultSet = statement.executeQuery(query1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setFolio(int folio) {
+        this.folio = folio;
     }
 }

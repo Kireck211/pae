@@ -328,9 +328,18 @@ public class Controller {
                 if(!theView.salesPanel.modifySellPanel.getTable().getSelectionModel().isSelectionEmpty() ) {
                     int row = theView.salesPanel.modifySellPanel.getTable().getSelectedRow();
                     Vector<Object> data = theView.salesPanel.modifySellPanel.getData(row); //Necesita ser casteado para cada objeto
-                    theView.salesPanel.modifySellPanel.getPanel2().clientNameField.setText((String) data.elementAt(2));
+                    //theView.salesPanel.modifySellPanel.getPanel2().clientNameField.setText((String) data.elementAt(2));
                     theView.salesPanel.modifySellPanel.getPanel2().commentField.setText((String) data.elementAt(9));
+                    theModel.setComment((String) data.elementAt(9));
+                    theModel.setFolio(Integer.parseInt((String)data.elementAt(0)));
                 }
+            }
+        });
+
+        theView.salesPanel.modifySellPanel.addModifyButton(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                theModel.setComment(theView.salesPanel.modifySellPanel.getPanel2().commentField.getText());
+                theModel.modifySell(theModel.folio,theModel.comment);
             }
         });
 
