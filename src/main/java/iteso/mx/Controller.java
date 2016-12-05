@@ -5,8 +5,11 @@ import iteso.mx.Models.Client;
 import iteso.mx.UI.ClientCreationPanel;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
 
 public class Controller {
 
@@ -26,6 +29,7 @@ public class Controller {
         addSignInActionListeners();
         addRegistrationActionListeners();
         addGlobalActionListeners();
+        addModifySellListeners();
         theView.addWindowListener(new WindowListener() {
             public void windowOpened(WindowEvent e) {
 
@@ -240,6 +244,7 @@ public class Controller {
                     crearClienteJF.setSize(300, 400);
                     crearClienteJF.setLocationRelativeTo(null);
                     crearClienteJF.setEnabled(true);
+                    crearClienteJF.setVisible(true);
                     crearClienteJF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                     JOptionPane.showMessageDialog(null, "Este cliente no se encuentra registrado", "Cliente no registrado", JOptionPane.ERROR_MESSAGE);
                 }
@@ -286,5 +291,31 @@ public class Controller {
 
     public boolean validateNewEmployee() {
         return true;
+    }
+
+    public void addModifySellListeners(){
+        theView.salesPanel.modifySellPanel.addDeleteButtonListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                int row = theView.salesPanel.modifySellPanel.getTable().getSelectedRow();
+                int index = Integer.parseInt((String)theView.salesPanel.modifySellPanel.getData(row).elementAt(0));
+
+                theModel.deleteSell(index);
+                theView.salesPanel.modifySellPanel.deleteRow();
+
+            }
+        });
+
+        /*theView.salesPanel.modifySellPanel.addRowSelectedListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                int row = theView.salesPanel.modifySellPanel.getTable().getSelectedRow();
+                Vector<Object> data = theView.salesPanel.modifySellPanel.getData(row); //Necesita ser casteado para cada objeto
+
+            }
+        });*/
+
+
+
+
     }
 }

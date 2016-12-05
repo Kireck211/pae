@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class Header extends JPanel {
     private JLabel nombreEmpleado;
     private JLabel IDEmpleado;
-    private JLabel hora;
+    //private JLabel hora;
     public JButton cerrarSesion;
 
 
@@ -19,15 +19,15 @@ public class Header extends JPanel {
         setBackground(new Color(82, 82, 84));
         nombreEmpleado = new JLabel("Nombre Empleado");
         IDEmpleado = new JLabel("ID Empleado");
-        hora = new JLabel("Hora");
+       // hora = new JLabel("Hora");
         cerrarSesion = new JButton("Cerrar Sesión");
         nombreEmpleado.setForeground(new Color(251, 251, 251));
         IDEmpleado.setForeground(new Color(251, 251, 251));
-        hora.setForeground(new Color(251, 251, 251));
+        //hora.setForeground(new Color(251, 251, 251));
         cerrarSesion.setBackground(new Color(251, 251, 251));
         add(nombreEmpleado);
         add(IDEmpleado);
-        add(hora);
+        //add(hora);
         add(cerrarSesion);
     }
 
