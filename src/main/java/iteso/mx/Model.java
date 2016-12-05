@@ -18,6 +18,7 @@ public class Model {
     public Statement statement;
     public ResultSet resultSet;
     public int idEmployee;
+    public String nameEmployee;
 
     public Model() {
         connection = null;
@@ -126,26 +127,21 @@ public class Model {
         return -1;
     }
 
-    public void setIDEmployee(int idEmployee) {
-        this.idEmployee = idEmployee;
-    }
-
-    public int getIDEmployeeDB(String userName) {
+    public void setIDEmployeeDB(String userName) {
         String query = "SELECT [IDEmpleado]\n" +
                 "  FROM [AUTOBUS].[dbo].[EMPLEADO]\n" +
                 "  WHERE Usuario='" + userName + "'";
         try {
             resultSet = statement.executeQuery(query);
             if(!resultSet.wasNull()) {
-                while(resultSet.next())
-                    return resultSet.getInt("IDEmpleado");
+                while(resultSet.next()) {
+                    this.idEmployee = resultSet.getInt("IDEmpleado");
+                    return;
+                }
             }
-            else
-                return -1;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1;
     }
 
     public void closeConnection() {
@@ -242,5 +238,26 @@ public class Model {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setNameEmployee() {
+        String query = "SELECT CONCAT(Nombre, ' ', App) AS Nombre FROM EMPLEADO WHERE IDEmpleado =" + idEmployee;
+        try {
+            resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                nameEmployee = resultSet.getString("Nombre");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Integer getIDEmpleado() {
+        return this.idEmployee;
+    }
+
+    public String getNameEmployee() {
+        return this.nameEmployee;
     }
 }

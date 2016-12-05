@@ -107,8 +107,7 @@ public class Controller {
                 String userName = theView.singInPanel.getUserJTextField();
                 String password = theView.singInPanel.getPasswordJTextField();
                 if (isUserPasswordCorrect(userName, password)) {
-                    int idEmployee = theModel.getIDEmployeeDB(userName);
-                    theModel.setIDEmployee(idEmployee);
+                    theModel.setIDEmployeeDB(userName);
                     showSalesPanel();
                 }
             }
@@ -133,6 +132,7 @@ public class Controller {
                     String user = theView.singInPanel.getUserJTextField();
                     String password = theView.singInPanel.getPasswordJTextField();
                     if (isUserPasswordCorrect(user, password)) {
+                        theModel.setIDEmployeeDB(user);
                         showSalesPanel();
                     }
                 }
@@ -151,8 +151,7 @@ public class Controller {
                     String user = theView.singInPanel.getUserJTextField();
                     String password = theView.singInPanel.getPasswordJTextField();
                     if (isUserPasswordCorrect(user, password)) {
-                        int idEmployee = theModel.getIDEmployeeDB(user);
-                        theModel.setIDEmployee(idEmployee);
+                        theModel.setIDEmployeeDB(user);
                         showSalesPanel();
                     }
                 }
@@ -209,12 +208,14 @@ public class Controller {
 
     public void addCities(int cities) {
         int index;
-        if (theView.salesPanel.sellPanel.destCityCBox.getItemCount() == 0)
-            return;
         if (cities == SOURCE_CITIES) {
+            if (theView.salesPanel.sellPanel.srcStateComboBox.getItemCount() == 0)
+                return;
             index = theView.salesPanel.sellPanel.srcStateIDs.get(theView.salesPanel.sellPanel.srcStateComboBox.getSelectedIndex());
             theView.salesPanel.sellPanel.addSrcCities(theModel.getCities(index));
         } else {
+            if (theView.salesPanel.sellPanel.destStateComboBox.getItemCount() == 0)
+                return;
             index = theView.salesPanel.sellPanel.destStateIDs.get(theView.salesPanel.sellPanel.destStateComboBox.getSelectedIndex());
             theView.salesPanel.sellPanel.addDestCities(theModel.getCities(index));
         }
@@ -298,6 +299,9 @@ public class Controller {
         addStates();
         addSellActionListeners();
         theView.salesPanel.sellPanel.selectDefault();
+        theModel.setNameEmployee();
+        theView.salesPanel.header.idEmpleadoL.setText(theModel.getIDEmpleado().toString());
+        theView.salesPanel.header.nombreEmpleadoL.setText(theModel.getNameEmployee());
         setModifySellTable();
     }
 
