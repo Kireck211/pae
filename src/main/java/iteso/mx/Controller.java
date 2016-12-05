@@ -328,6 +328,8 @@ public class Controller {
                 if(!theView.salesPanel.modifySellPanel.getTable().getSelectionModel().isSelectionEmpty() ) {
                     int row = theView.salesPanel.modifySellPanel.getTable().getSelectedRow();
                     Vector<Object> data = theView.salesPanel.modifySellPanel.getData(row); //Necesita ser casteado para cada objeto
+                    theView.salesPanel.modifySellPanel.getPanel2().clientNameField.setText((String) data.elementAt(2));
+                    theView.salesPanel.modifySellPanel.getPanel2().commentField.setText((String) data.elementAt(9));
                 }
             }
         });

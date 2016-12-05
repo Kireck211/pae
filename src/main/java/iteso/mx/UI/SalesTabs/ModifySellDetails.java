@@ -10,28 +10,28 @@ import java.util.ArrayList;
 public class ModifySellDetails extends JPanel {
 
     JLabel clientNameLabel;
-    JTextField clientNameField;
+    public JTextField clientNameField;
 
-    JComboBox<String> srcStateComboBox;
-    JComboBox<String> destStateComboBox;
+    //JComboBox<String> srcStateComboBox;
+    //JComboBox<String> destStateComboBox;
 
-    JComboBox<String> srcCityCBox;
-    JComboBox<String> destCityCBox;
+    //JComboBox<String> srcCityCBox;
+    //JComboBox<String> destCityCBox;
 
     JLabel commentLabel;
-    JTextArea commentField;
+    public JTextArea commentField;
 
-    JLabel srcStateLabel;
-    JLabel destStateLabel;
+    //JLabel srcStateLabel;
+    //JLabel destStateLabel;
 
-    JLabel srcCityLabel;
-    JLabel destCityLabel;
+    //JLabel srcCityLabel;
+    //JLabel destCityLabel;
 
-    ArrayList<Integer> srcStateIDs;
-    ArrayList<Integer> destStateIDs;
+    //ArrayList<Integer> srcStateIDs;
+    //ArrayList<Integer> destStateIDs;
 
-    ArrayList<Integer> srcCityIDs;
-    ArrayList<Integer> destCityIDs;
+    //ArrayList<Integer> srcCityIDs;
+    //ArrayList<Integer> destCityIDs;
 
     JButton deleteButton;
     JButton modifyButton;
@@ -42,68 +42,80 @@ public class ModifySellDetails extends JPanel {
 
         clientNameLabel = new JLabel("Nombre:");
         clientNameField = new JTextField(15);
-        srcStateLabel = new JLabel("Estado (Origen):");
-        destStateLabel = new JLabel("Estado (Destino):");
-        srcStateComboBox = new JComboBox<String>();
-        destStateComboBox = new JComboBox<String>();
-        srcStateIDs = new ArrayList<Integer>();
-        destStateIDs = new ArrayList<Integer>();
-        srcCityLabel = new JLabel("Ciudad (Origen):");
-        destCityLabel = new JLabel("Ciudad (Destino):");
-        srcCityCBox = new JComboBox<String>();
-        destCityCBox = new JComboBox<String>();
-        srcCityIDs = new ArrayList<Integer>();
-        destCityIDs = new ArrayList<Integer>();
+        //srcStateLabel = new JLabel("Estado (Origen):");
+        //destStateLabel = new JLabel("Estado (Destino):");
+        //srcStateComboBox = new JComboBox<String>();
+        //destStateComboBox = new JComboBox<String>();
+        //srcStateIDs = new ArrayList<Integer>();
+        //destStateIDs = new ArrayList<Integer>();
+        //srcCityLabel = new JLabel("Ciudad (Origen):");
+        //destCityLabel = new JLabel("Ciudad (Destino):");
+        //srcCityCBox = new JComboBox<String>();
+        //destCityCBox = new JComboBox<String>();
+        //srcCityIDs = new ArrayList<Integer>();
+        //destCityIDs = new ArrayList<Integer>();
         commentField = new JTextArea(10, 30);
         commentLabel = new JLabel("Comentarios:");
         deleteButton = new JButton("Borrar Venta");
         modifyButton = new JButton("Modicar Venta");
 
+        // Add labels
         gb.gridx = 0;
         gb.gridy = 0;
-        add(clientNameLabel,gb);
+        gb.insets = new Insets(0, 0, 20, 0);
+        add(clientNameLabel, gb);
 
-        gb.gridy = 1;
-        add(srcStateLabel,gb);
+        /*gb.gridy++;
+        add(srcStateLabel, gb);
 
-        gb.gridy = 2;
-        add(srcCityLabel);
+        gb.gridx = 2;
+        add(destStateLabel, gb);
 
-        gb.gridy = 3;
-        add(commentLabel,gb);
+        gb.gridx = 0;
+        gb.gridy++;
+        add(srcCityLabel, gb);
+
+        gb.gridx = 2;
+        add(destCityLabel, gb);*/
+
+        gb.gridx = 0;
+        gb.gridy++;
+        add(commentLabel, gb);
+
+        // Add text fields
 
         gb.gridx = 1;
         gb.gridy = 0;
-        add(clientNameField,gb);
+        gb.gridwidth = 3;
+        gb.fill = GridBagConstraints.HORIZONTAL;
+        add(clientNameField, gb);
 
-        gb.gridy = 1;
-        add(srcStateComboBox,gb);
-
-        gb.gridy = 2;
-        add(srcCityCBox,gb);
-
-        gb.gridy = 3;
-        add(commentField,gb);
-
-        gb.gridx = 2;
-        gb.gridy = 1;
-        add(destStateLabel,gb);
-
-        gb.gridy = 2;
-        add(destCityLabel,gb);
+        /*gb.gridy++;
+        gb.gridwidth = 1;
+        add(srcStateComboBox, gb);
 
         gb.gridx = 3;
-        gb.gridy = 1;
-        add(destStateComboBox,gb);
+        add(destStateComboBox, gb);
 
-        gb.gridy = 2;
-        add(destCityCBox,gb);
+        gb.gridx = 1;
+        gb.gridy++;
+        add(srcCityCBox, gb);
 
-        gb.gridy = 3;
-        add(deleteButton);
+        gb.gridx = 3;
+        add(destCityCBox, gb);*/
 
-        gb.gridy = 4;
-        add(modifyButton);
+        gb.gridx = 1;
+        gb.gridy++;
+        gb.gridwidth = 3;
+        add(commentField, gb);
+
+        gb.gridx = 0;
+        gb.gridy++;
+        gb.gridwidth = 4;
+        add(modifyButton, gb);
+
+        gb.gridy++;
+        add(deleteButton, gb);
     }
 
     public JButton getDeleteButton(){

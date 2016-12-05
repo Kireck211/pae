@@ -15,7 +15,7 @@ public class ModifySell extends JPanel{
     ModifySellTableModel tableModel;
     JTable table;
     JScrollPane scrollPane;
-    ModifySellDetails panel2;
+    public ModifySellDetails panel2;
 
    public ModifySell(){
        super(new GridLayout(2,0));
@@ -53,7 +53,7 @@ public class ModifySell extends JPanel{
 
     }
 
-    public JPanel getPanel2() {
+    public ModifySellDetails getPanel2() {
         return panel2;
     }
 
