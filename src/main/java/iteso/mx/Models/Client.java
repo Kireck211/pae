@@ -19,6 +19,16 @@ public class Client extends Model{
     private String createClientQuery = "INSERT INTO EMPLEADO\n" +
                                         "VALUES(";
 
+    public Client() {
+    }
+
+    public Client(String Nombre, int day, int month, int year, String Genero, String RFC) {
+        this.Nombre = Nombre;
+        this.FechaNacimiento = new Date(year, month, day);
+        this.Genero = Genero;
+        this.RFC = RFC;
+    }
+
     public void createClient(String user, String password, String name, String apP, String apM, String gender) {
         createClientQuery += ("'" + user + "',");
         createClientQuery += ("'" + password + "',");

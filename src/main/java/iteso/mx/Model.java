@@ -2,6 +2,7 @@ package iteso.mx;
 
 
 import iteso.mx.Models.Client;
+import iteso.mx.Models.Employee;
 
 import java.sql.*;
 import java.util.*;
@@ -17,6 +18,7 @@ public class Model {
     public Statement statement;
     public ResultSet resultSet;
     public int idEmployee;
+    public String nameEmployee;
 
     public Model() {
         connection = null;
@@ -125,26 +127,21 @@ public class Model {
         return -1;
     }
 
-    public void setIDEmployee(int idEmployee) {
-        this.idEmployee = idEmployee;
-    }
-
-    public int getIDEmployeeDB(String userName) {
+    public void setIDEmployeeDB(String userName) {
         String query = "SELECT [IDEmpleado]\n" +
                 "  FROM [AUTOBUS].[dbo].[EMPLEADO]\n" +
                 "  WHERE Usuario='" + userName + "'";
         try {
             resultSet = statement.executeQuery(query);
             if(!resultSet.wasNull()) {
-                while(resultSet.next())
-                    return resultSet.getInt("IDEmpleado");
+                while(resultSet.next()) {
+                    this.idEmployee = resultSet.getInt("IDEmpleado");
+                    return;
+                }
             }
-            else
-                return -1;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1;
     }
 
     public void closeConnection() {
@@ -190,7 +187,7 @@ public class Model {
                 rows.add(aux);
             }
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
 
@@ -204,9 +201,18 @@ public class Model {
         return client;
     }
 
-    public void insertClient(String user, String password, String name, String apP, String apM, String gender) {
-        Client client = new Client();
-        client.createClient(user, password, name, apP, apM, gender);
+    public void insertClient(Client client) {
+        String insertClientQuery = "INSERT INTO CLIENTE\n"+
+                                        "VALUES ('" +
+                                        client.Nombre + "'," +
+                                        "'" + client.FechaNacimiento.getYear() + "-" + client.FechaNacimiento.getMonth() + "-" + client.FechaNacimiento.getDate() + "'," +
+                                        "'" + client.Genero + "'," +
+                                        "'" + client.RFC + "')";
+        try {
+            resultSet = statement.executeQuery(insertClientQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteSell(int idSell) {
@@ -216,5 +222,42 @@ public class Model {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void insertEmployee(Employee employee) {
+        String insertEmployeeQuery = "INSERT INTO EMPLEADO\n" +
+                "VALUES (";
+        insertEmployeeQuery += ("'" + employee.user + "',");
+        insertEmployeeQuery += ("'" + employee.password + "',");
+        insertEmployeeQuery += ("'" + employee.name + "',");
+        insertEmployeeQuery += ("'" + employee.apP + "',");
+        insertEmployeeQuery += ("'" + employee.apM + "',");
+        insertEmployeeQuery += ("'" + employee.gender + "')");
+        try {
+            resultSet = statement.executeQuery(insertEmployeeQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setNameEmployee() {
+        String query = "SELECT CONCAT(Nombre, ' ', App) AS Nombre FROM EMPLEADO WHERE IDEmpleado =" + idEmployee;
+        try {
+            resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                nameEmployee = resultSet.getString("Nombre");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Integer getIDEmpleado() {
+        return this.idEmployee;
+    }
+
+    public String getNameEmployee() {
+        return this.nameEmployee;
     }
 }
