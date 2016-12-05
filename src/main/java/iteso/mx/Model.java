@@ -2,6 +2,7 @@ package iteso.mx;
 
 
 import iteso.mx.Models.Client;
+import iteso.mx.Models.Employee;
 
 import java.sql.*;
 import java.util.*;
@@ -190,7 +191,7 @@ public class Model {
                 rows.add(aux);
             }
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
 
@@ -204,15 +205,40 @@ public class Model {
         return client;
     }
 
-    public void insertClient(String user, String password, String name, String apP, String apM, String gender) {
-        Client client = new Client();
-        client.createClient(user, password, name, apP, apM, gender);
+    public void insertClient(Client client) {
+        String insertClientQuery = "INSERT INTO CLIENTE\n"+
+                                        "VALUES ('" +
+                                        client.Nombre + "'," +
+                                        "'" + client.FechaNacimiento.getYear() + "-" + client.FechaNacimiento.getMonth() + "-" + client.FechaNacimiento.getDate() + "'," +
+                                        "'" + client.Genero + "'," +
+                                        "'" + client.RFC + "')";
+        try {
+            resultSet = statement.executeQuery(insertClientQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteSell(int idSell) {
         String deleteSell = "execute Devolucion_Cliente '"+idSell+"'";
         try {
             statement.execute(deleteSell);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertEmployee(Employee employee) {
+        String insertEmployeeQuery = "INSERT INTO EMPLEADO\n" +
+                "VALUES (";
+        insertEmployeeQuery += ("'" + employee.user + "',");
+        insertEmployeeQuery += ("'" + employee.password + "',");
+        insertEmployeeQuery += ("'" + employee.name + "',");
+        insertEmployeeQuery += ("'" + employee.apP + "',");
+        insertEmployeeQuery += ("'" + employee.apM + "',");
+        insertEmployeeQuery += ("'" + employee.gender + "')");
+        try {
+            resultSet = statement.executeQuery(insertEmployeeQuery);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -118,7 +118,6 @@ public class RegistrationPanel extends JPanel {
         return passwordJTextField.getText();
     }
 
-
     public String getNameTF() {
         return nameTF.getText();
     }
@@ -134,6 +133,4 @@ public class RegistrationPanel extends JPanel {
     public String getGenderTF() {
         return (String) genderTF.getSelectedItem();
     }
-
-
 }
