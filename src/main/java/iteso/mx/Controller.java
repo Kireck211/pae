@@ -259,6 +259,7 @@ public class Controller {
                     crearClienteJF.add(crearClienteP);
                     crearClienteJF.setSize(350, 270);
                     crearClienteJF.setLocationRelativeTo(null);
+                    theView.setVisible(false);
                     crearClienteJF.setEnabled(true);
                     crearClienteJF.setVisible(true);
                     JOptionPane.showMessageDialog(null, "Este cliente no se encuentra registrado", "Cliente no registrado", JOptionPane.ERROR_MESSAGE);
@@ -277,7 +278,7 @@ public class Controller {
                     theModel.registerSell(date, numberTickets, route, idEmployee, idClient, comments);
                     setModifySellTable();
                     JOptionPane.showMessageDialog(null, "La venta fue realizada con éxito", "Venta realizada", JOptionPane.INFORMATION_MESSAGE);
-
+                    theView.salesPanel.sellPanel.eraseData();
                 }
             }
         });

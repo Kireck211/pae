@@ -234,4 +234,10 @@ public class Sell extends JPanel {
     public void addNumberTicketsActionListener(ActionListener actionListener) {
         numberTicketsCBox.addActionListener(actionListener);
     }
+
+    public void eraseData() {
+        clientNameField.setText("");
+        numberTicketsCBox.setSelectedIndex(0);
+        comment.setText("");
+    }
 }
